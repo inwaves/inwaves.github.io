@@ -28,3 +28,6 @@ No About page is complete without facts of various degrees of utility:
 - I'm interested in productivity, and ways to use computers as tools for thought. I like the ideas of Alan Kay, Doug Engelbart and Bret Victor. I use Notion every day, and have tried Roam and Obsidian. (I left Evernote some years ago and never looked back.)
 - I'm really into perfumes, and tend to go on rants about fragrances I like. I wear Kouros a lot, my current favourite is Durga from DS & Durga, and I'm really proud to have picked up one of the last bottles of Oud de Nil from Penhaligon.
 - My favourite fiction author is David Foster Wallace. If you don't have time for Infinite Jest, read "Federer, both flesh and not".
+
+## Reaching out
+You can email me at andrei [at] inwaves.io. 
