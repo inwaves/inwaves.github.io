@@ -1,4 +1,10 @@
-*This work was done as part of SERI MATS, under Leo Gao’s guidance. Thank you to Erik Jenner and Johannes Treutlein for discussions and comments on the draft.*
+---
+layout: post
+title: What sorts of systems can be deceptive?
+permalink: /deceptive-systems/
+---
+
+*The following is a crosspost from [the alignment forum](https://www.alignmentforum.org/posts/atSHHCSP3NKBtqxes/what-sorts-of-systems-can-be-deceptive). This work was done as part of SERI MATS, under Leo Gao’s guidance. Thank you to Erik Jenner and Johannes Treutlein for discussions and comments on the draft.*
 
 I’m interested in understanding deception in machine intelligence better. Specifically, I want to understand what precursors there are to deceptive alignment, and whether upon observing these precursors, we can change our approach to achieve better outcomes. In this article, I outline my current thinking on this topic, and consider a bunch of properties that systems which can be deceptive might share. I am still pretty confused about how this works, and I don’t yet have good ideas for what comes next.
 

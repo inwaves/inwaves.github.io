@@ -1,4 +1,10 @@
-*This write-up was produced as part of the SERI MATS programme under Evan Hubinger’s mentorship. It is also my first post on LW, so feedback is very welcome!*
+---
+layout: post
+title: Why you might expect homogeneous takeoff: evidence from ML research
+permalink: /homogeneous-takeoff/
+---
+
+*The below is a cross-post from [the alignment forum](https://www.alignmentforum.org/posts/RQn45KzN5cojLLb3L/why-you-might-expect-homogeneous-take-off-evidence-from-ml).*
 
 Introduction
 ============
