@@ -6,13 +6,11 @@ permalink: /homogeneous-takeoff/
 
 *The below is a cross-post from [the alignment forum](https://www.alignmentforum.org/posts/RQn45KzN5cojLLb3L/why-you-might-expect-homogeneous-take-off-evidence-from-ml).*
 
-Introduction
-============
+# Introduction
 
 This article aims to draw a connection between recent ML research and the claim that future advanced AI systems may be homogenous. First, I briefly review [this article](https://www.alignmentforum.org/posts/mKBfa8v4S9pNKSyKK/homogeneity-vs-heterogeneity-in-ai-takeoff-scenarios), where the idea of homogenous take-off is introduced. Then, I outline two different arguments why you might update in the direction of homogenous take-off. For each of the arguments I mention key uncertainties that I have about the argument itself, as well as broader open questions.
 
-TL; DR
-------
+## TL; DR
 
 I present two reasons to believe that as models become larger they also become more homogenous, i.e. they behave more similarly to each other: 
 
@@ -21,8 +19,7 @@ I present two reasons to believe that as models become larger they also become m
 
 I’ve somewhat updated in the direction of homogenous take-off as a result of these arguments, though I think that there are still ways in which it’s unclear if e.g. decreasing variance with size rules out heterogeneity.
 
-What’s homogeneous take-off?
-============================
+# What’s homogeneous take-off?
 
 There are several axes along which different AI takeoff scenarios could differ: speed, continuity, and number of main actors. [Homogeneity vs. heterogeneity in AI takeoff scenarios](https://www.alignmentforum.org/posts/mKBfa8v4S9pNKSyKK/homogeneity-vs-heterogeneity-in-ai-takeoff-scenarios) introduces a new way to look at a potential take-off, through the lens of model **homogeneity**. Homogeneity intuitively refers to how similar models are at any given time given some definition of similarity. We might specifically refer to homogeneity with regards to alignment, which, again intuitively, means “models are more or less aligned to the same degree” (or: “aligned models will not coexist with unaligned models”).
 
@@ -39,17 +36,15 @@ The article sets out a list of arguments supporting the idea of homogenous take-
 
 In this article I want to present two technical arguments from recent ML research that support the idea of homogenous take-off. First, as models become larger, variance between models decreases. Second, neural networks seem to be biased toward simple solutions even before training.
 
-Argument from variance
-======================
+# Argument from variance
 
-Bias-variance decomposition
----------------------------
+## Bias-variance decomposition
 
 One of the main practical insights of statistical learning theory is related to the bias-variance decomposition of mean squared error. In this section I’ll be introducing the concepts of bias and variance and discussing their importance in the classical and the overparameterised regimes. I’ll be using the notation from [Adlam & Pennington, 2020](https://proceedings.neurips.cc/paper/2020/file/7d420e2b2939762031eed0447a9be19f-Paper.pdf). 
 
 The main idea is that for a supervised learning task where a model \\(\\hat{y}\\) is minimising mean squared error on a training set \\(\\mathcal{D}_{tr}\\), we can decompose the on a test point \\(x \\in \\mathcal{D}_{te}\\)  as:
 
-\\\[\\mathbb{E}\[\\hat y(x) - y(x)\]^2 = (\\mathbb{E} \\hat y(x) - \\mathbb{E} y(x))^2 + \\mathbb{V}\[\\hat y(x)\] + \\mathbb{V}\[y(x)\]\\\]
+<latex>\\\[\\mathbb{E}\[\\hat y(x) - y(x)\]^2 = (\\mathbb{E} \\hat y(x) - \\mathbb{E} y(x))^2 + \\mathbb{V}\[\\hat y(x)\] + \\mathbb{V}\[y(x)\]\\\]</latex>
 
 where \\(y(x)\\) is the ground truth. The first term is the squared bias, the second is the variance and the third is irreducible noise in the test data. The randomness in these variables is canonically taken to come from sampling noise, though as we’ll see shortly there are other sources too. 
 
@@ -65,8 +60,7 @@ This is the received wisdom from the bias-variance decomposition in the “class
 
 **Figure 1. From **[**Belkin et al., 2019**](https://www.pnas.org/doi/full/10.1073/pnas.1903070116). A visual representation of (a) the underparameterised regime, where the bias-variance trade-off occurs as models increase in capacity (here formalised as the size of a hypothesis class \\(\\mathcal{H}\\)) and (b) the modern overparameterised regime, where test risk decreases despite models which are large relative to the size of their training datasets. 
 
-Double descent and variance
----------------------------
+## Double descent and variance
 
 Several recent papers ([Yang et al., 2020](http://proceedings.mlr.press/v119/yang20j/yang20j.pdf), [Lin & Dobriban, 2021](https://www.jmlr.org/papers/volume22/20-1211/20-1211.pdf), [Adlam & Pennington, 2020](https://proceedings.neurips.cc/paper/2020/file/7d420e2b2939762031eed0447a9be19f-Paper.pdf)) examine double descent through the lens of the bias-variance decomposition. Broadly speaking, the main finding is that variance behaves unimodally – it increases, peaks, and then decreases monotonically. Depending on the magnitude of bias relative to variance, several test risk curves can be obtained, including double descent – see Figure 2. below.
 
@@ -93,8 +87,7 @@ It’s also worth mentioning that these studies take place in the asymptotic set
 
 If this analysis is correct, as long as we control the ratio we can ensure that models become more homogenous as they become larger. It’s worth noting that this hasn’t been replicated yet, to my knowledge, and that this unimodal variance explanation for double descent is not the only hypothesis, see e.g. [Kuzborskij et al., 2021](https://proceedings.neurips.cc/paper/2021/file/f754186469a933256d7d64095e963594-Paper.pdf) for an account of DD related to the smallest positive eigenvalue of the feature covariance matrix.
 
-How might this turn out to be false?
-------------------------------------
+## How might this turn out to be false?
 
 First, it’s possible that the findings from analysis of variance are not robust to changes in architecture or learning task, though at least [Yang et al. 2020](http://proceedings.mlr.press/v119/yang20j/yang20j.pdf) seem to cover quite a few experimental set-ups (including changing architecture and dataset as well as other potentially-less-impactful training hyperparameters). This means that it might be useful to do more experiments to probe the robustness of these findings. If they turn out to scale well/hold across architectures, then this is stronger evidence in favour of homogeneity.
 
@@ -102,23 +95,20 @@ Second, it could be that residual variance – variance that is not eliminated t
 
 I don’t have a good idea for how to resolve this uncertainty. It seems to me that unless we can find a more precise definition of homogeneity, we can’t say exactly how much residual variance matters.
 
-Things I don’t yet understand
------------------------------
+## Things I don’t yet understand
 
 *   How does the fixed-design/random-design decomposition affect the result? For example see [Hastie et al., 2022](https://arxiv.org/pdf/1903.08560).
 *   Lots of these experiments use random features, and it’s unclear to me why this is more appropriate/easy to analyse than shallow neural networks, which presumably are closer to what we care about.
 *   Where does the variance from optimisation fit in? Is it the same as variance from initialisation, which is where the optimiser starts? E.g. [Neal et al., 2018](https://arxiv.org/pdf/1810.08591.pdf) mention variance due to optimisation, but they don’t study how bias and variance change during training.
     *   They point to variance from optimisation as encompassing: random initialisation and stochastic mini-batching, but they also say that their results hold even with batch gradient descent.
 
-Open questions
---------------
+## Open questions
 
 *   Should we expect “prediction” homogeneity to translate to alignment properties?
 *   Why does variance have unimodal behaviour? It might be worth replicating the experiments in [Lin & Dobriban, 2021](https://www.jmlr.org/papers/volume22/20-1211/20-1211.pdf) where they use the parameterisation level and data aspect ratio to control the variance.
     *   [Yang et al., 2020](http://proceedings.mlr.press/v119/yang20j/yang20j.pdf) conjecture that it’s regularisation that leads to variance decreasing past the peak, though this seems like a broad remark that does not add much useful information.
 
-Argument from simplicity bias
-=============================
+# Argument from simplicity bias
 
 We have good empirical evidence that neural networks are biased toward simple functions which fit the data. There’s no consensus on the mechanism behind this bias, but there are lots of competing explanations.
 
@@ -132,16 +122,14 @@ This is consistent with the finding that variance decreases with scale, at least
 
 I’m a bit more sceptical that this line of argument supports homogeneity directly, mostly because I don’t think that a biased parameter-function map explains all the properties of models found through e.g. SGD (nor do I think the Mingard et al. papers make these claims). If the influence of specific training hyperparameters is enough to induce heterogeneity between runs – again, only gesturing at the concept of heterogeneity rather than defining it – then even if the parameter-function map hypothesis of generalisation is true, it’s evidence *against* homogeneity.
 
-How might this turn out to be false?
-------------------------------------
+## How might this turn out to be false?
 
 *   **The biased prior drives most of the inductive bias, but it doesn’t explain everything.** Even if details about the training setup do not account for most of DNNs’ capacity to generalise, they may still account for some particular property which is relevant from an alignment perspective;
 *   **Simplicity is not the same as homogeneity.** Even if all functions that NNs tend to find are simple by some measure, it doesn’t mean that they are the same function. There might be some key input where two up-to-then identical functions diverge, which could lead to negative outcomes. Again, it’s possible that we won’t be able to prove that two such functions are the same.
 *   **Objections to the biased prior hypothesis. **It could be that the biased parameter-function map account of NN generalisation does not scale to larger networks/more complex architectures/other tasks (for some discussion, see [this article](https://www.lesswrong.com/posts/5p4ynEJQ8nXxp2sxC/parsing-chris-mingard-on-neural-networks#Scalability)). This might mean that some other hypothesis better explains NNs’ performance in the overparameterised regime – there are many related to: the stochasticity of gradient descent, the loss landscape (through basins of attraction or through flat minima), NNs’ similarity to GPs, implicit regularisation and others – which might lead us to update away from model homogeneity.
 
   
-Summary
-==========
+# Summary
 
 This article outlines two arguments from recent ML research for why homogenous take-off is a plausible story. One stems from an empirically observed decrease in variance with model size, which is consistent with the double descent phenomenon. The other is a consequence of the finding that neural networks are a priori biased toward simple functions, which means that they are likely to find solutions with similar properties regardless of the particular training parameters.
 

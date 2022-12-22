@@ -8,11 +8,9 @@ permalink: /deceptive-systems/
 
 I’m interested in understanding deception in machine intelligence better. Specifically, I want to understand what precursors there are to deceptive alignment, and whether upon observing these precursors, we can change our approach to achieve better outcomes. In this article, I outline my current thinking on this topic, and consider a bunch of properties that systems which can be deceptive might share. I am still pretty confused about how this works, and I don’t yet have good ideas for what comes next.
 
-Preliminaries
-=============
+# Preliminaries
 
-What is deception?
-------------------
+## What is deception?
 
 Commonly, by deception we mean a scenario where an intelligent system behaves in a way that hides what information it knows from another system, or from a human overseer. Fundamentally, the reason to be deceptive is that behaving honestly would lead to the system being penalised by its designers, perhaps through a training process that can intervene directly on its internal mechanisms.
 
@@ -29,8 +27,7 @@ In this article, I use “optimisation” in the context of an [optimising syste
 
 This is related to the view that some folks at MIRI have that consequentialism is about the work that’s being done, rather than the type of system that is carrying it out. If that is the case, then in the limit of generalisation capability (i.e. systems which exhibit robust generalisation), it doesn’t matter how the system is implemented – specifically, whether it’s doing search or not – for how likely it is to exhibit deceptive behaviour. Note that my impression of Eliezer’s view on this is that he does think that you can build a weaker system which doesn’t exhibit some undesirable property such as deception, but that this weaker system is just not enough to carry out a pivotal act. (I base this mostly on [Eliezer’s and Richard’s conversation](https://www.lesswrong.com/s/n945eovrA3oDueqtq/p/7im8at9PmhbT4JHsW).)
 
-What properties are upstream of deception?
-==========================================
+# What properties are upstream of deception?
 
 Let’s assume that some system has a consequentialist objective. This system lies somewhere on an axis of generalisation capability. On one extreme of this axis are **controllers**, systems which can be arbitrarily capable at carrying out their intended purpose, but which cannot extrapolate to other tasks. By “arbitrarily capable” I mean to hint that controllers can be very complex, i.e. they may have to carry out quite difficult tasks, by our standards, while still not being able to generalise to other tasks. One exception might be if those tasks are subtasks of their initial task, in the same way “boil water” is a subtask of a robot that makes coffee.
 
@@ -40,8 +37,7 @@ On the other extreme of the axis are optimisers. These are systems which can gen
 
 We kind of understand what systems look like in these extremes, but it’s unclear to me what characteristics intermediate systems – those which are some mix of searching and heuristic behaviour – have. It seems important to find this out, given that neural networks seem to be somewhere on this continuum. If scaling deep learning leads to systems which generalise better – and thus are more like optimisers – then we’ll hit a point where deceptive alignment is “natural”.
 
-Disentangling generalisation and consequentialism
-=================================================
+# Disentangling generalisation and consequentialism
 
 Here’s an idea: to have systems which are deceptively aligned, you need them to both have a consequentialist objective and have high generalisation capability.
 
@@ -69,15 +65,13 @@ I’m going to make a bunch of claims regarding these four quadrants/regimes, al
 
 Insofar as these two axes are separate, I imagine that there’s something like a Pareto front in the space of possible models, such that we can get most of our capability for the least amount of risk of deception possible. This is the way in which I see further work in this area to be impactful.
 
-Where this falls short
-======================
+# Where this falls short
 
 There are various things here that confuse me, the main being what the x-axis represents. There is something unsatisfying about saying that deception happens because of generalisation capability and calling it a day. I’m interested if we can pinpoint deception even more precisely, in terms of properties like Ajeya’s [situational awareness](https://www.lesswrong.com/posts/pRkFkzwKZ2zfa3R6H/without-specific-countermeasures-the-easiest-path-to) (“playing the training game”), or goal-directedness. In other words, what mechanisms enable deceptive alignment, and where do they emerge as a system becomes more capable?
 
 Another confusion regarding this 2D system idea is that the two axes are not orthogonal. In my view, it’s not possible to become more capable and not become consequentialist at all. This is because systems become more capable as they are trained on scenarios that are more varied, more broad, and more complex. That gets you consequentialism. Still, even if the axes are correlated, it doesn’t mean that all systems lie on the first diagonal, and for every increase in capability you get a proportional increase in consequentialism.
 
-Appendix: Degree of coupling?
-=============================
+# Appendix: Degree of coupling?
 
 It seems like an axis which overlaps to a significant degree with generalisation ability is the degree of internal coupling of the system. On the low-coupling extreme, each of a system’s components is practically independent from the others. Their effects can chain together, such that after component A fulfils its purpose, component B can activate if its conditions are met. But there are no situations where in order for the system to achieve some behaviour two components need to fire at the same time, or be in two particular states, or interact in a specific way.
 
