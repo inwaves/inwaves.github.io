@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why you might expect homogeneous takeoff: evidence from ML research
+title: "Why you might expect homogeneous takeoff: evidence from ML research"
 permalink: /homogeneous-takeoff/
 ---
 
