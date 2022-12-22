@@ -30,4 +30,4 @@ No About page is complete without facts of various degrees of utility:
 - My favourite fiction author is David Foster Wallace. If you don't have time for Infinite Jest, read "Federer, both flesh and not".
 
 ## Reaching out
-You can email me at andrei [at] inwaves.io. 
+You can email me at andrei [at] inwaves.io. I'm also on [LinkedIn](https://www.linkedin.com/in/aalexaa/), and [Github](https://github.com/inwaves).
