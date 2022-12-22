@@ -20,8 +20,7 @@ As described in the paper, deception is an inner misalignment failure, i.e. in t
 
 In this framing, the main way we might get deceptive alignment is through a system that performs internal search. While search is a central example, I’m curious to understand more generally what the prerequisites are for deceptive alignment. I’m particularly interested in the connection with consequentialism. In a sense, deception is just one of the many strategies a consequentialist agent might use to achieve its goals.
 
-How does the idea of optimisation matter here?
-----------------------------------------------
+## How does the idea of optimisation matter here?
 
 In this article, I use “optimisation” in the context of an [optimising system](https://www.lesswrong.com/posts/znfkdCoHMANwqc2WE/the-ground-of-optimization-1) – a system which tends to reconfigure a space toward a small set of target states, while being robust to perturbation. This does not require the existence of a part of the system which is doing the optimisation, i.e. a separate optimiser. In this view, I think it’s possible to have a continuum of optimising systems, ranging from search over possible actions on one extreme to a set of heuristics on the other, such that all these systems outwardly behave as consequentialists, regardless of how they’re implemented.
 
