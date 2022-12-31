@@ -20,6 +20,9 @@ I care about AI going well because I believe it will determine the welfare of ve
 ## What I am currently up to
 I'm currently in the SF Bay Area, participating in two research/engineering programmes: the Machine Learning for Aligmment Theory Scholarship from the Stanford Existential Risk Initiative, and the ML for Alignment Bootcamp organised by Redwood Research. 
 
+My latest project is [DTchess](https://github.com/inwaves/dtchess), a library I'm writing to train and open-source language models fine-tuned to play chess. The goal here is to do mechanistic interpretability on these models and detect interesting properties -- such as internal search, or optimisation, in the case of chess. For additional information, check out the [auditing games for high-level
+interpretability](https://www.alignmentforum.org/posts/EbL5W5ccwfbqFiYBJ/auditing-games-for-high-level-interpretability-1) on the alignment forum.
+
 ## Trivia
 No About page is complete without facts of various degrees of utility:
 - I'm left-handed, and I have a scar on my left thumb from an archery accident as a teen.
