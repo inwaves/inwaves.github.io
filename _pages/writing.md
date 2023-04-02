@@ -24,7 +24,7 @@ The full write-up is available at [this link](../assets/mpnn.pdf).
 An investigation of transformers' and RNNs' ability to model long-term dependencies through the lens of probabilistic modelling. You can find the write-up [here](../assets/gpt3rnn.pdf), and the code [here](https://github.com/inwaves/prob-models).
 
 ## Investigating short-term climate forecasts with surrogate modelling
-Using Gaussian Processes as surrogate models for accurate climate forecasting. This project emulates the UKESM1.0 climate model for precipitation, surface temperature and snow thickness. With ZI Attahiru, M Salam and K Spukas. Write-up [here](../assets/surrogate-modelling.pdf), codebase [here](https://github.com/inwaves/climate-surrogate-model).
+This project uses Gaussian processes (GPs) as surrogate models for accurate climate forecasting. We emulate the UKESM1.0 climate model for precipitation, surface temperature and snow thickness. Work in collaboration with ZI Attahiru, M Salam and K Spukas. Write-up [here](../assets/surrogate-modelling.pdf), codebase [here](https://github.com/inwaves/climate-surrogate-model).
 
 ## Presentation on "Counterfactual Reasoning and Learning Systems..."
 This is a presentation on the paper [Counterfactual Reasoning and Learning Systems: The Example of Computational Advertising](https://www.jmlr.org/papers/volume14/bottou13a/bottou13a.pdf) by Bottou et al. You can find the slides [here](../assets/counterfactual-reasoning.pdf).
