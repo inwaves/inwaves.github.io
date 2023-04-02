@@ -1,3 +1,10 @@
+---
+layout: page
+title: Writing
+permalink: /writing/
+---
+
+
 # Writing
 
 Here are a few projects I've worked on and their write-ups. Some also have a public codebase.
