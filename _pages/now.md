@@ -1,3 +1,9 @@
+---
+layout: page
+title: Now
+permalink: /now/
+---
+
 # Now
 
 This page contains what I'm currently up to.
