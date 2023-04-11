@@ -14,5 +14,5 @@ This page contains what I'm currently up to.
 interpretability](https://www.alignmentforum.org/posts/EbL5W5ccwfbqFiYBJ/auditing-games-for-high-level-interpretability-1) on the alignment forum.
 
 01/07/22
-- I moved to the SF Bay Area, to participate in two research/engineering programmes: the Machine Learning for Aligmment Theory Scholarship from the Stanford Existential Risk Initiative, and the ML for Alignment Bootcamp organised by Redwood Research. 
+- I moved to the SF Bay Area to participate in two research/engineering programmes: the Machine Learning for Aligmment Theory Scholarship from the Stanford Existential Risk Initiative, and the ML for Alignment Bootcamp organised by Redwood Research. 
 
