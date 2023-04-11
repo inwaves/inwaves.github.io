@@ -18,10 +18,7 @@ Within safety research, I'm interested in how the inductive biases of neural net
 I care about AI going well because I believe it will determine the welfare of very many future lives. I am concerned about existential risk – the risk that some events, including emerging technologies like AI, have the capacity to destroy the human race, or drastically curtail its potential (to find out more about x-risk, have a look at [The Precipice](https://theprecipice.com/)). I also believe that it's important to have safe AI systems even before they pose existential risks, because failing to do so may lead to disproportionate negative impacts on minorities, or destabilisation of democratic elections.
 
 ## What I am currently up to
-I'm currently in the SF Bay Area, participating in two research/engineering programmes: the Machine Learning for Aligmment Theory Scholarship from the Stanford Existential Risk Initiative, and the ML for Alignment Bootcamp organised by Redwood Research. 
-
-My latest project is [DTchess](https://github.com/inwaves/dtchess), a library I'm writing to train and open-source language models fine-tuned to play chess. The goal here is to do mechanistic interpretability on these models and detect interesting properties -- such as internal search, or optimisation, in the case of chess. For additional information, check out the [auditing games for high-level
-interpretability](https://www.alignmentforum.org/posts/EbL5W5ccwfbqFiYBJ/auditing-games-for-high-level-interpretability-1) on the alignment forum.
+Have a look at my [now page](./now.md).
 
 ## Trivia
 No About page is complete without facts of various degrees of utility:
