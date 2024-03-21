@@ -2,7 +2,7 @@
 layout: post
 title: "Why you might expect homogeneous takeoff: evidence from ML research"
 permalink: /homogeneous-takeoff/
-categories: [Serious, AI safety]
+categories: [AI safety]
 ---
 
 *The below is a cross-post from [the alignment forum](https://www.alignmentforum.org/posts/RQn45KzN5cojLLb3L/why-you-might-expect-homogeneous-take-off-evidence-from-ml).*

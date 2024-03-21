@@ -2,7 +2,7 @@
 layout: post
 title: "Inductive bias of neural networks on 1D regression: an empirical examination"
 permalink: /inductive-bias/
-categories: [Serious, ML]
+categories: [Machine learning]
 ---
 
 The full write-up of my dissertation is now public [here](https://drive.google.com/file/d/10u8LjfHjnfsqv8Jtre90Ysf93LDHLDKt/view?usp=sharing). You can also find the code on [Github](https://github.com/inwaves/nn-inductive-bias-regression). 
