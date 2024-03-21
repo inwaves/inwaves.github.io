@@ -38,3 +38,6 @@ No About page is complete without facts of various degrees of utility:
 
 ## Reaching out
 You can email me at andrei [at] inwaves.io. I'm also on [LinkedIn](https://www.linkedin.com/in/aalexaa/), [Github](https://github.com/inwaves) and [LessWrong](https://www.lesswrong.com/users/inwaves).
+
+## About this site
+This is a static site built with Jekyll on Github Pages. The theme is [Reverie](https://github.com/amitmerchant1990/reverie).
