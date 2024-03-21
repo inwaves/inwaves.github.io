@@ -2,6 +2,7 @@
 layout: post
 title: What sorts of systems can be deceptive?
 permalink: /deceptive-systems/
+categories: [Serious, AI safety]
 ---
 
 *The following is a crosspost from [the alignment forum](https://www.alignmentforum.org/posts/atSHHCSP3NKBtqxes/what-sorts-of-systems-can-be-deceptive). This work was done as part of SERI MATS, under Leo Gao’s guidance. Thank you to Erik Jenner and Johannes Treutlein for discussions and comments on the draft.*

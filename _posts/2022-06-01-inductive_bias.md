@@ -2,6 +2,7 @@
 layout: post
 title: "Inductive bias of neural networks on 1D regression: an empirical examination"
 permalink: /inductive-bias/
+categories: [Serious, ML]
 ---
 
 I just made the full write-up for my dissertation public [here](https://drive.google.com/file/d/10u8LjfHjnfsqv8Jtre90Ysf93LDHLDKt/view?usp=sharing). Here is the abstract:

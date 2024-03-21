@@ -17,6 +17,13 @@ Within safety research, I'm interested in how the inductive biases of neural net
 
 I care about AI going well because I believe it will determine the welfare of very many future lives. I am concerned about existential risk – the risk that some events, including emerging technologies like AI, have the capacity to destroy the human race, or drastically curtail its potential (to find out more about x-risk, have a look at [The Precipice](https://theprecipice.com/)). I also believe that it's important to have safe AI systems even before they pose existential risks, because failing to do so may lead to disproportionate negative impacts on minorities, or destabilisation of democratic elections.
 
+As of early 2024, some of these concepts have become polarised within AI and tech circles, which is unfortunate for the quality of the discourse. Also, many of these conversations seem to happen on Twitter, which isn't the best medium for thoughtful, nuanced debate. I've mostly stayed out of picking sides (e.g. accelerationists vs. decelerationists) – I'm a fan of [keeping one's identity small](https://paulgraham.com/identity.html) – but perhaps it's worth clearing up my stance.
+
+I'm genuinely excited about technology that improves people's lives. I get a sense of joy when people find tools that make their day-to-day better, that enable them to do new things, or to think in new ways. Science, tech and manufacturing breakthroughs in the last century or so have largely transformed our lives, and mostly for the better. I am optimistic that we're not done yet, and that humanity can continue to thrive. Progress continues in AI, biotech, renewable energy – these and other exciting areas are full of smart, driven, capable folks, working to build the future.
+
+As these developments continue, I want to be mindful of their impact on society and our environment. I want to be clear-eyed about what I'm building, and aware of hidden incentives. I don't want to contribute to technology which causes clear harm, or has a high risk of dual use. I recognise that this is difficult, and I'll try to navigate this as best as I can.
+
+
 ## What I am currently up to
 Have a look at my [now page](./now.md).
 
