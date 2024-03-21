@@ -10,3 +10,4 @@ In no order, here are a bunch of cool things:
 - [Nick Sweeting's blog](https://docs.sweeting.me/s/blog#About);
 - the [Designing a New Old Home](https://simonsarris.medium.com/designing-a-new-old-home-part-1-cf298b58ed41) series from Simon Sarris, and generally his musings and aesthetic on building;
 - Derek Sivers' writing, for example [Time is personal. Your year changes when your life changes.](https://sive.rs/mny)
+- Danny Carey's drumming skills in this performance of [Pneuma](https://www.youtube.com/watch?v=FssULNGSZIA)

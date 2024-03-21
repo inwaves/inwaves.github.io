@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Inductive bias of neural networks on 1D regression: an empirical examination"
-permalink: /inductive-bias/
+title: "Intelligent game playing with AI"
+permalink: /intelligent-game-playing/
 categories: [Machine learning]
 ---
 
