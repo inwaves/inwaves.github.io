@@ -3,9 +3,6 @@
 - type: github
   icon: "fab fa-github"
 
-- type: twitter
-  icon: "fa-brands fa-x-twitter"
-
 - type: email
   icon: "fas fa-envelope"
   noblank: true # open link in current tab
@@ -16,4 +13,4 @@
   
 - type: linkedin
   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
-  url:  'htts://linkedin.com/in/aalexaa'                  # Fill with your Linkedin homepage
+  url:  'htts://linkedin.com/in/aalexaa'
