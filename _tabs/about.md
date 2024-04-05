@@ -2,7 +2,7 @@
 title: About
 icon: fas fa-info-circle
 permalink: /about/
-order: 4
+order: 1
 ---
 
 Hi! I'm Andrei Alexandru. I'm passionate about making the future go well for humans, especially in light of increasing AI capabilities. I look like this:
@@ -26,7 +26,7 @@ As these developments continue, I want to be mindful of their impact on society 
 
 
 ## What I am currently up to
-Have a look at my [now page](../../_tabs/now.md).
+Have a look at my [now page](./now.md).
 
 ## Trivia
 No About page is complete without facts of various degrees of utility:

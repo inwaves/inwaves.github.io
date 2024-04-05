@@ -2,6 +2,8 @@
 layout: page
 title: Now
 permalink: /now/
+icon: fas fa-clock
+order: 2
 ---
 
 This page contains what I'm currently up to.

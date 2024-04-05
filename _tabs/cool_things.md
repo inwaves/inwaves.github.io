@@ -2,6 +2,7 @@
 layout: page
 title: Cool things
 permalink: /cool-things/
+icon: fas fa-scroll
 ---
 
 In no order, here are a bunch of cool things:
