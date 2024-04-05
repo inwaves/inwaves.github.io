@@ -1,6 +1,7 @@
 ---
 title: "Are graph neural networks (GNNs) fundamentally bottlenecked?"
 date: 2022-02-15
+permalink: /gnn-bottleneck/
 categories: [Machine learning]
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Comparing GPT-3 and RNNs as probabilistic generative models"
 date: 2022-01-01
+permalink: /gpt-probabilistic/
 categories: [Machine learning]
 ---
 

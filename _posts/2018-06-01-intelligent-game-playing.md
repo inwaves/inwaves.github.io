@@ -1,6 +1,7 @@
 ---
 title: "Intelligent game playing with AI"
 date: 2018-06-01
+permalink: /AI-game-playing/
 categories: [Machine learning]
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Investigating short-term climate forecasts with surrogate modelling"
 date: 2021-12-20
+permalink: /climate-surrogate-modelling/
 categories: [Machine learning]
 ---
 
