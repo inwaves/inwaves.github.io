@@ -26,7 +26,7 @@ As these developments continue, I want to be mindful of their impact on society 
 
 
 ## What I am currently up to
-Have a look at my [now page](now.md).
+Have a look at my [now page](../../_tabs/now.md).
 
 ## Trivia
 No About page is complete without facts of various degrees of utility:
