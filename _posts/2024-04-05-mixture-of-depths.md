@@ -22,7 +22,7 @@ So instead of having a dynamic computation graph, let's pre-specify a total comp
 
 Given this fixed budget, let's get transformers to learn to dynamically allocate compute to each input token, in each layer, i.e. which $k$ of the $T$ total tokens will participate in each block. Because not all tokens are used, the number of FLOPs used is lower than a vanilla transformer.
 
-![MoD Figure 1](../assets/mod-fig1.png)
+![MoD Figure 1](../images/mod-fig1.png)
 
 The way you do this is through a routing mechanism: moving down through the network layers, each token either has the layer applied to it (just like a vanilla transformer, no changes there) or it passes through a residual connection (i.e. no computation is applied to it). The routing applies to entire transformer blocks, which comprise one attention layer, and one MLP.
 
@@ -59,10 +59,10 @@ It's a good idea to go read the original paper for a nuanced interpretation of t
 
     One way to look at this is that for a given wall-clock time spent during training, an MoD model will get more training steps in than a vanilla model, because each step takes less time. So the MoD model trains for longer!
 
-![MoD Figure 5](../assets/mod-fig5.png)
+![MoD Figure 5](../images/mod-fig5.png)
 2. The best MoD variant they found routed every other block (and left other block as in vanilla transformers), and used (by my lights) *super* aggressive top-k choices: only 12.5% of all tokens got processed by the routed blocks! That means 87.5% get skipped by every other transformer block.
 
-![MoD Figure 7](../assets/mod-fig7.png)
+![MoD Figure 7](../images/mod-fig7.png)
 3. You can combine mixture-of-depths and mixture-of-experts models to get an even handier acronym: MoDE. There's two architecture ideas, one of which seems to work better than the other.
 
 

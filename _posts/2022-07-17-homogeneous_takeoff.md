@@ -63,13 +63,13 @@ This is the received wisdom from the bias-variance decomposition in the “class
 
 ## Double descent and variance
 
-Several recent papers ([Yang et al., 2020](http://proceedings.mlr.press/v119/yang20j/yang20j.pdf), [Lin & Dobriban, 2021](https://www.jmlr.org/papers/volume22/20-1211/20-1211.pdf), [Adlam & Pennington, 2020](https://proceedings.neurips.cc/paper/2020/file/7d420e2b2939762031eed0447a9be19f-Paper.pdf)) examine double descent through the lens of the bias-variance decomposition. Broadly speaking, the main finding is that variance behaves unimodally – it increases, peaks, and then decreases monotonically. Depending on the magnitude of bias relative to variance, several test risk curves can be obtained, including double descent – see Figure 2. below.
+Several recent papers ([Yang et al., 2020](https://proceedings.mlr.press/v119/yang20j/yang20j.pdf), [Lin & Dobriban, 2021](https://www.jmlr.org/papers/volume22/20-1211/20-1211.pdf), [Adlam & Pennington, 2020](https://proceedings.neurips.cc/paper/2020/file/7d420e2b2939762031eed0447a9be19f-Paper.pdf)) examine double descent through the lens of the bias-variance decomposition. Broadly speaking, the main finding is that variance behaves unimodally – it increases, peaks, and then decreases monotonically. Depending on the magnitude of bias relative to variance, several test risk curves can be obtained, including double descent – see Figure 2. below.
 
 The important observation here is that as models increase in size, variance decreases. To zoom out a bit, remember that variance captures the degree to which models differ in their predictions across different training runs. Decreasing variance means that models become more homogenous. In a sense, this follows directly from double descent, since we know that bias decreases with size and that after the interpolation threshold test risk decreases monotonically.
 
 ![](https://lh4.googleusercontent.com/MuoHTSFxEB1phvL22_K5coRUDckJz21JRFEGrNMkkzRDZCr7TCocno_WXuZoSuNhC4rjGFyq3octwMCnwmoFGI2W-WacD5ySfoB4xshuApXMtcXmGbZGSW101SZB4PsqM5hEb9AJSjYunwvERdI)
 
-**Figure 2. From **[**Yang et al., 2020**](http://proceedings.mlr.press/v119/yang20j/yang20j.pdf)**.** A hypothetical test risk curve plotted against model complexity, alongside its bias and variance components. The three cases are as follows: (a) if bias dominates variance over the entire x-axis, then test risk follows a monotonic decrease; (b) if bias and variance dominate in different regimes, the test risk follows a double descent curve; (c) if variance dominates bias over the entire x-axis, then test risk is simply unimodal – without the initial decrease.
+**Figure 2. From **[**Yang et al., 2020**](https://proceedings.mlr.press/v119/yang20j/yang20j.pdf)**.** A hypothetical test risk curve plotted against model complexity, alongside its bias and variance components. The three cases are as follows: (a) if bias dominates variance over the entire x-axis, then test risk follows a monotonic decrease; (b) if bias and variance dominate in different regimes, the test risk follows a double descent curve; (c) if variance dominates bias over the entire x-axis, then test risk is simply unimodal – without the initial decrease.
 
 To try and understand what is happening with double descent, the latter two papers focus on decomposing variance into additional sources of randomness (training data sampling, parameter initialisation and label noise) and find that some components behave unimodally, while others increase up to the interpolation threshold and stay constant afterward (e.g. variance due to sampling and due to label noise, see Figure 3j). 
 
@@ -90,7 +90,7 @@ If this analysis is correct, as long as we control the ratio we can ensure that 
 
 ## How might this turn out to be false?
 
-First, it’s possible that the findings from analysis of variance are not robust to changes in architecture or learning task, though at least [Yang et al. 2020](http://proceedings.mlr.press/v119/yang20j/yang20j.pdf) seem to cover quite a few experimental set-ups (including changing architecture and dataset as well as other potentially-less-impactful training hyperparameters). This means that it might be useful to do more experiments to probe the robustness of these findings. If they turn out to scale well/hold across architectures, then this is stronger evidence in favour of homogeneity.
+First, it’s possible that the findings from analysis of variance are not robust to changes in architecture or learning task, though at least [Yang et al. 2020](https://proceedings.mlr.press/v119/yang20j/yang20j.pdf) seem to cover quite a few experimental set-ups (including changing architecture and dataset as well as other potentially-less-impactful training hyperparameters). This means that it might be useful to do more experiments to probe the robustness of these findings. If they turn out to scale well/hold across architectures, then this is stronger evidence in favour of homogeneity.
 
 Second, it could be that residual variance – variance that is not eliminated through training – is enough to invalidate the homogeneity hypothesis, in the sense that residual variance could lead to different behaviour/properties of models that exist at the same time. I’m not sure how likely this is, given that the residual variances seem to be quite small – on the order of 10^{-3} according to [Adlam & Pennington, 2020](https://proceedings.neurips.cc/paper/2020/file/7d420e2b2939762031eed0447a9be19f-Paper.pdf) – though of course here the threshold is unknown. (How much variance implies heterogeneity doesn’t seem to be a well-posed question.)
 
@@ -107,7 +107,7 @@ I don’t have a good idea for how to resolve this uncertainty. It seems to me t
 
 *   Should we expect “prediction” homogeneity to translate to alignment properties?
 *   Why does variance have unimodal behaviour? It might be worth replicating the experiments in [Lin & Dobriban, 2021](https://www.jmlr.org/papers/volume22/20-1211/20-1211.pdf) where they use the parameterisation level and data aspect ratio to control the variance.
-    *   [Yang et al., 2020](http://proceedings.mlr.press/v119/yang20j/yang20j.pdf) conjecture that it’s regularisation that leads to variance decreasing past the peak, though this seems like a broad remark that does not add much useful information.
+    *   [Yang et al., 2020](https://proceedings.mlr.press/v119/yang20j/yang20j.pdf) conjecture that it’s regularisation that leads to variance decreasing past the peak, though this seems like a broad remark that does not add much useful information.
 
 # Argument from simplicity bias
 
