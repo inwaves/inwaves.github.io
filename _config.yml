@@ -28,8 +28,8 @@ url: https://inwaves.github.io
 github:
   username: inwaves # change to your github username
 
-twitter:
-  username: inwavesaye # change to your twitter username
+# twitter:
+#   username: inwavesaye # change to your twitter username
 
 social:
   # Change to your full name.
