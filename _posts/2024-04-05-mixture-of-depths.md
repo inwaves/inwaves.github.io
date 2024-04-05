@@ -1,6 +1,7 @@
 ---
 title: Understanding mixture-of-depths 
 date: 2024-04-05
+math: true
 categories: [Machine learning]
 ---
 
