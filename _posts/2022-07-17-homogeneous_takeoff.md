@@ -44,7 +44,7 @@ In this article I want to present two technical arguments from recent ML researc
 
 One of the main practical insights of statistical learning theory is related to the bias-variance decomposition of mean squared error. In this section I’ll be introducing the concepts of bias and variance and discussing their importance in the classical and the overparameterised regimes. I’ll be using the notation from [Adlam & Pennington, 2020](https://proceedings.neurips.cc/paper/2020/file/7d420e2b2939762031eed0447a9be19f-Paper.pdf). 
 
-The main idea is that for a supervised learning task where a model ($$\hat{y}$$) is minimising mean squared error on a training set ($$mathcal{D}_{tr}$$), we can decompose the on a test point $$x \in \mathcal{D}_{te}$$  as:
+The main idea is that for a supervised learning task where a model ($$\hat{y}$$) is minimising mean squared error on a training set $$\mathcal{D}_{tr}$$, we can decompose the on a test point $$x \in \mathcal{D}_{te}$$  as:
 
 $$[\mathbb{E}\[\hat y(x) - y(x)]^2 = (\mathbb{E} \hat y(x) - \mathbb{E} y(x))^2 + \mathbb{V}[\hat y(x)] + \mathbb{V}[y(x)]]$$
 
