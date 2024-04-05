@@ -2,7 +2,7 @@
 title: About
 icon: fas fa-info-circle
 permalink: /about/
-order: 4
+order: 1
 ---
 
 Hi! I'm Andrei Alexandru. I'm passionate about making the future go well for humans, especially in light of increasing AI capabilities. I look like this:
