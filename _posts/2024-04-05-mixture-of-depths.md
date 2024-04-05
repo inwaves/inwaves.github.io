@@ -8,21 +8,21 @@ categories: [Machine learning]
 
 Google Deepmind recently released this paper: [Mixture-of-Depths: Dynamically allocating compute in transformer-based language models](https://arxiv.org/abs/2404.02258).
 
-tl;dr: relative to a vanilla transformer, you can train either (a) higher-performance or (b) same performance, but faster to run models using a technique called mixture-of-depths. Conceptually, the change is straightforward: for each transformer block, learn a routing mechanism that determines whether a given token goes through the block, or skips it – as in a residual connection. 
+In a few words: relative to a vanilla transformer, you can train either (a) models with higher performance or (b) faster-to-run models with the same performance, using a technique called mixture-of-depths. Conceptually, the change is straightforward: for each transformer block, learn a routing mechanism that determines whether a given token goes through the block, or skips it – as in a residual connection. 
 
 ## Setting the stage
-If you've been watching the machine learning space in the last 5 years or so, you'll have noticed language models becoming near-ubiquitous. And for good reason! They're unreasonably effective at general purpose tasks, so long as you can scale them and the datasets they're trained on to be large enough. We now also have a set of post-training techniques that make them even more capable and useful to end-users – RLHF, SFT on downstream tasks, prompting techniques – making them useful as chatbots, coding assistants, and other applications we haven't dreamt of yet.
+If you've been watching the machine learning space in the last 5 years or so, you'll have noticed language models becoming near-ubiquitous. And for good reason! They're unreasonably effective at general purpose tasks, so long as you can scale them and the datasets they're trained on to be large enough. We now also have a set of post-training techniques that make them even more capable and useful to end-users – RLHF, SFT on downstream tasks, prompt engineering – making them useful as general purpose chatbots, coding assistants, and other applications we haven't dreamt of yet.
 
-But the scaling part is kind of a big deal. The largest models in production today probably cost >$100m to train, and have a non-negligible cost to re-train. This cost is a combination of training very large models (100s of billions of parameters) on very large datasets (10s of *trillions* of tokens) and likely for very many epochs. On one hand, these figures are likely going down, because hardware improvements (think NVIDIA's latest GTC) and algorithmic progress (making the models themselves "easier to train") are chipping away at compute costs. On the other, there's higher demand for GPUs, we're training more and more complex systems, and there's an increasing number of companies wanting to explore what LLMs can do for them. If you can bring down the compute cost of training and serving a large language model, the entire ecosystem benefits.
+But the scaling part is kind of a big deal. The largest models in production today probably cost >$100m to train, and have a non-negligible cost to re-train. This cost is a combination of training very large models (100s of billions of parameters) on very large datasets (10s of *trillions* of tokens) and likely for very many epochs. On one hand, these figures are likely going down, because hardware improvements (think NVIDIA's latest GTC) and algorithmic progress (making the models themselves more efficient) are chipping away at compute costs. On the other hand, there's higher demand for GPUs, we're training more and more complex systems, and there's an increasing number of companies wanting to explore what LLMs can do for them. If you can bring down the compute cost of training and serving a large language model, the entire ecosystem benefits.
 
 ## Mixture of depths
-The starting intuition for the [Raposo et al. 2024](https://arxiv.org/abs/2404.02258) paper is that not all tokens should take the same amount of compute or time when making a prediction. Some are more important than others (we know this because self-attention works well) so we can try to translate this into compute efficiency gains.
+The starting intuition for the [Raposo et al. 2024](https://arxiv.org/abs/2404.02258) paper is that not all tokens in a text sequence should take the same amount of compute or time when making a prediction. Some are more important than others (we know this because self-attention works well), so we can try to translate this into compute efficiency gains.
 
-The term of art here is "conditional computation", the gist of which is that you can reduce total compute used by only expending it when needed, e.g. see [Bengio et al. 2016](https://arxiv.org/abs/1511.06297). One problem with this is that it leads to dynamic computation graphs – that is, we might not know in advance how much compute we need when we apply conditional computation. This is bad because in large scale ML systems we want to maximise hardware utilisation, preferably knowing in advance how much memory, bandwidth etc. we're going to need for a particular computation.
+The term of art here is "conditional computation", the gist of which is that you can reduce total compute used by only expending it when needed, e.g. see [Bengio et al. 2016](https://arxiv.org/abs/1511.06297). One problem with this is that we might not know in advance how much compute we need when we apply conditional computation – the computation graph is *dynamic*. This is bad because in large scale ML systems we want to maximise hardware utilisation, preferably knowing in advance how much memory or bandwidth we'll need for a particular computation.
 
-So instead of having a dynamic computation graph, let's pre-specify a total compute budget, which doesn't change during training, so that hardware is leveraged as much as possible. We can tie this budget to the number of tokens in a sequence that can participate in a transformer block's computations – let's say $k$ of $T$ total tokens.
+To avoid dynamic computation graphs, we can pre-specify a total compute budget, which doesn't change during training. We can tie this budget to the number of tokens in a sequence that can participate in a transformer block's computations – let's say $k$ of $T$ total tokens.
 
-Given this fixed budget, let's get transformers to learn to dynamically allocate compute to each input token, in each layer, i.e. which $k$ of the $T$ total tokens will participate in each block. Because not all tokens are used, the number of FLOPs used is lower than a vanilla transformer.
+Given this fixed budget, we can get transformers to learn to dynamically allocate compute to each input token, in each layer, i.e. which $k$ of the $T$ total tokens will participate in each block. Because not all tokens participate in every computation, less compute is required, and the number of FLOPs used during training is lower than for a vanilla transformer.
 
 ![MoD Figure 1](../images/mod-fig1.png)
 
@@ -66,12 +66,14 @@ It's a good idea to go read the original paper for a nuanced interpretation of t
 
     One way to look at this is that for a given wall-clock time spent during training, an MoD model will get more training steps in than a vanilla model, because each step takes less time. So the MoD model trains for longer!
 
-![MoD Figure 5](../images/mod-fig5.png)
 2. The best MoD variant they found routed every other block (and left other block as in vanilla transformers), and used (by my lights) *super* aggressive top-k choices: only 12.5% of all tokens got processed by the routed blocks! That means 87.5% get skipped by every other transformer block.
+    ![MoD Figure 5](../images/mod-fig5.png)
 
-![MoD Figure 7](../images/mod-fig7.png)
 3. You can combine mixture-of-depths and mixture-of-experts models to get an even handier acronym: MoDE. There's two architecture ideas, one of which seems to work better than the other.
+    ![MoD Figure 7](../images/mod-fig7.png)
 
 
 ## Wrapping up
-I like the simplicity of the routing; lots of great ideas seem obvious in retrospect! It's an inexpensive intervention that reduces compute cost and lets us train better models. The flip-side of this is that we should evaluate any downstream impact before this gets widely rolled out – does it change model behaviour in any way? 
+I like the simplicity of the routing – it's basically a learned form of dropout, calculated per token, per block. It's an inexpensive intervention that reduces compute cost and lets us train better models. You could argue that not much is new here, but lots of great ideas seem obvious in retrospect – like [ResNets](https://arxiv.org/abs/1512.03385) adding the residual connection for the first time.
+
+One point to be mindful of when making this kind of intervention is whether it negatively affects downstream behaviour. I expect that MoDE had been used internally at GDM for a while before this paper was released, & so I expect to see analyses in this direction soon. 
