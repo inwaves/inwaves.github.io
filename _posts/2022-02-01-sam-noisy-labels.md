@@ -1,6 +1,7 @@
 ---
 title: "Sharpness-aware minimisation and label noise"
 date: 2022-02-01
+permalink: /sharpness-aware-minimisation/
 categories: [Machine learning]
 ---
 

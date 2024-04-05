@@ -1,6 +1,7 @@
 ---
 title: What sorts of systems can be deceptive?
 date: 2022-10-31
+permalink: /deceptive-systems/
 categories: [AI safety]
 ---
 

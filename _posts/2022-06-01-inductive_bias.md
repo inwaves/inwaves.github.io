@@ -1,6 +1,7 @@
 ---
 title: "Inductive bias of neural networks on 1D regression: an empirical examination"
 date: 2022-06-01
+permalink: /inductive-bias-of-nn/
 categories: [Machine learning]
 ---
 
