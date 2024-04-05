@@ -2,7 +2,7 @@
 layout: page
 title: Now
 permalink: /now/
-icon: fas fa-clock
+icon: fas fa-mug-hot
 order: 2
 ---
 
