@@ -4,7 +4,7 @@ date: 2022-06-01
 categories: [Machine learning]
 ---
 
-The full write-up of my dissertation is now public [here](https://drive.google.com/file/d/10u8LjfHjnfsqv8Jtre90Ysf93LDHLDKt/view?usp=sharing). You can also find the code on [Github](https://github.com/inwaves/nn-inductive-bias-regression). 
+The full write-up of my dissertation is now public [here](../../assets/inductive-bias-of-nn.pdf). You can also find the code on [Github](https://github.com/inwaves/nn-inductive-bias-regression). 
 
 Here is the abstract:
 
