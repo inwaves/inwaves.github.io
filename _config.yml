@@ -83,17 +83,17 @@ social_preview_image: # string, local or CORS resources
 toc: true
 
 comments:
-  active: disqus
+  active: giscus
   # The active options are as follows:
   disqus:
-    shortname: inwaves.disqus.com
+    shortname: 
   # utterances settings › https://utteranc.es/
   utterances:
     repo: # <gh-username>/<repo>
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: # <gh-username>/<repo>
+    repo: inwaves/inwaves.github.io
     repo_id:
     category:
     category_id:
