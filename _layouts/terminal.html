@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ site.title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#000; color:#0f0; font-family: monospace; padding: 2rem; }
+    #terminal { white-space: pre-wrap; }
+    .cursor { display:inline-block; width:10px; background:#0f0; margin-left:2px;
+              animation: blink 1s steps(2, start) infinite; }
+    @keyframes blink { 50% { background: transparent; } }
+    a { color: #0f0; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div><span id="cursor" class="cursor"></span>
+  <script>
+  const lines = [
+    `$ whoami`,
+    `{{ site.social.name }}`,
+    `$ echo "{{ site.tagline }}"`,
+    `{{ site.tagline }}`,
+    `$ links`,
+    `about -> /about/`,
+    `blog -> /blog/`];
+  const term = document.getElementById('terminal');
+  let i = 0, j = 0;
+  function type() {
+    if (i < lines.length) {
+      if (j < lines[i].length) {
+        term.textContent += lines[i][j++];
+      } else {
+        term.textContent += '\n';
+        i++; j = 0;
+      }
+      setTimeout(type, 80);
+    } else {
+      document.getElementById('cursor').style.display = 'none';
+    }
+  }
+  type();
+  </script>
+</body>
+</html>
