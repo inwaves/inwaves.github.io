@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inwaves.io - Terminal</title>
+    <link rel="stylesheet" href="assets/terminal/css/terminal.css">
+</head>
+<body>
+    <!-- Mode Toggle -->
+    <div class="mode-toggle" title="Switch to boring mode">
+        <span class="mode-label">boring mode</span>
+    </div>
+
+    <!-- Terminal Container -->
+    <div class="terminal-container">
+        <!-- Terminal Header (tmux-style status bar) -->
+        <div class="terminal-header">
+            <span class="header-left">
+                <span class="wave-pattern">⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅</span> inwaves
+            </span>
+            <span class="header-center">
+                <span class="wave-separator">⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅</span>
+            </span>
+            <span class="header-right">
+                <span>[main]</span>
+                <span id="terminal-time">[00:00:00]</span>
+            </span>
+        </div>
+
+        <!-- Terminal Content Area -->
+        <div class="terminal-content">
+            <!-- Command History Display -->
+            <div class="terminal-output" id="terminal-output">
+                <div class="welcome-message">
+                    <pre class="ascii-logo">
+⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅
+       _                                     
+      (_)_ ____      ____ ___   _____  ___  
+      | | '_ \ \ /\ / / _` \ \ / / _ \/ __| 
+      | | | | \ V  V / (_| |\ V /  __/\__ \ 
+      |_|_| |_|\_/\_/ \__,_| \_/ \___||___/ 
+                                             
+⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱ⋅
+                    </pre>
+                    <p class="welcome-text">Welcome to inwaves.io - AI Safety Research Terminal</p>
+                    <p class="welcome-subtext">Type <span class="command-highlight">help</span> to see available commands</p>
+                </div>
+            </div>
+
+            <!-- Command Input Area -->
+            <div class="terminal-input-line">
+                <span class="prompt">
+                    <span class="wave-prompt">⋅.˳˳.⋅</span>
+                    <span class="prompt-user">visitor@inwaves.io</span>
+                    <span class="prompt-dir">~</span>
+                    <span class="prompt-symbol">$</span>
+                </span>
+                <input type="text" 
+                       class="terminal-input" 
+                       id="terminal-input" 
+                       autocomplete="off"
+                       spellcheck="false"
+                       autofocus>
+                <span class="cursor" id="cursor">▌</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/terminal/js/terminal.js"></script>
+</body>
+</html>
