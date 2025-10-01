@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 Allow: /
-Sitemap: https://inwaves.github.io/sitemap.xml
+Sitemap: https://hd54s5ck6r3jexi5.preview.dev.igent.ai/sitemap.xml

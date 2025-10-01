@@ -2,20 +2,20 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 	<title>Posts</title>
 	<subtitle>AI safety research and technical writing</subtitle>
-	<link rel="self" type="application/atom+xml" href="https://inwaves.github.io/posts/feed.xml"/>
-  <link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/"/>
+	<link rel="self" type="application/atom+xml" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/feed.xml"/>
+  <link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/"/>
   
 	<updated>2024-04-05T00:00:00+00:00</updated>
 	
-	<id>https://inwaves.github.io/posts/feed.xml</id>
+	<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/feed.xml</id>
 	<entry xml:lang="en">
 		<title>Understanding mixture-of-depths</title>
 		<published>2024-04-05T00:00:00+00:00</published>
 		<updated>2024-04-05T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/mixture-of-depths/"/>
-		<id>https://inwaves.github.io/posts/mixture-of-depths/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/mixture-of-depths/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/mixture-of-depths/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/mixture-of-depths/">&lt;p&gt;Google Deepmind recently released this paper: &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2404.02258&quot;&gt;Mixture-of-Depths: Dynamically allocating compute in transformer-based language models&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/mixture-of-depths/">&lt;p&gt;Google Deepmind recently released this paper: &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2404.02258&quot;&gt;Mixture-of-Depths: Dynamically allocating compute in transformer-based language models&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;In a few words: relative to a vanilla transformer, you can train either (a) models with higher performance or (b) faster-to-run models with the same performance, using a technique called mixture-of-depths. Conceptually, the change is straightforward: for each transformer block, learn a routing mechanism that determines whether a given token goes through the block, or skips it – as in a residual connection.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;setting-the-stage&quot;&gt;Setting the stage&lt;a class=&quot;zola-anchor&quot; href=&quot;#setting-the-stage&quot; aria-label=&quot;Anchor link for: setting-the-stage&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h2&gt;
@@ -79,10 +79,10 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>What sorts of systems can be deceptive?</title>
 		<published>2022-10-31T00:00:00+00:00</published>
 		<updated>2022-10-31T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/deceptive-systems/"/>
-		<id>https://inwaves.github.io/posts/deceptive-systems/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/deceptive-systems/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/deceptive-systems/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/deceptive-systems/">&lt;p&gt;&lt;em&gt;The following is a crosspost from &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.alignmentforum.org&#x2F;posts&#x2F;atSHHCSP3NKBtqxes&#x2F;what-sorts-of-systems-can-be-deceptive&quot;&gt;the alignment forum&lt;&#x2F;a&gt;. This work was done as part of SERI MATS, under Leo Gao&#x27;s guidance. Thank you to Erik Jenner and Johannes Treutlein for discussions and comments on the draft.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/deceptive-systems/">&lt;p&gt;&lt;em&gt;The following is a crosspost from &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.alignmentforum.org&#x2F;posts&#x2F;atSHHCSP3NKBtqxes&#x2F;what-sorts-of-systems-can-be-deceptive&quot;&gt;the alignment forum&lt;&#x2F;a&gt;. This work was done as part of SERI MATS, under Leo Gao&#x27;s guidance. Thank you to Erik Jenner and Johannes Treutlein for discussions and comments on the draft.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;I&#x27;m interested in understanding deception in machine intelligence better. Specifically, I want to understand what precursors there are to deceptive alignment, and whether upon observing these precursors, we can change our approach to achieve better outcomes. In this article, I outline my current thinking on this topic, and consider a bunch of properties that systems which can be deceptive might share. I am still pretty confused about how this works, and I don&#x27;t yet have good ideas for what comes next.&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;preliminaries&quot;&gt;Preliminaries&lt;a class=&quot;zola-anchor&quot; href=&quot;#preliminaries&quot; aria-label=&quot;Anchor link for: preliminaries&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h1&gt;
@@ -140,10 +140,10 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>Why you might expect homogeneous takeoff: evidence from ML research</title>
 		<published>2022-07-17T00:00:00+00:00</published>
 		<updated>2022-07-17T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/homogeneous-takeoff/"/>
-		<id>https://inwaves.github.io/posts/homogeneous-takeoff/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/homogeneous-takeoff/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/homogeneous-takeoff/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/homogeneous-takeoff/">&lt;p&gt;&lt;em&gt;The below is a cross-post from &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.alignmentforum.org&#x2F;posts&#x2F;RQn45KzN5cojLLb3L&#x2F;why-you-might-expect-homogeneous-take-off-evidence-from-ml&quot;&gt;the alignment forum&lt;&#x2F;a&gt;.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/homogeneous-takeoff/">&lt;p&gt;&lt;em&gt;The below is a cross-post from &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.alignmentforum.org&#x2F;posts&#x2F;RQn45KzN5cojLLb3L&#x2F;why-you-might-expect-homogeneous-take-off-evidence-from-ml&quot;&gt;the alignment forum&lt;&#x2F;a&gt;.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h1&gt;
 &lt;p&gt;This article aims to draw a connection between recent ML research and the claim that future advanced AI systems may be homogenous. First, I briefly review &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.alignmentforum.org&#x2F;posts&#x2F;mKBfa8v4S9pNKSyKK&#x2F;homogeneity-vs-heterogeneity-in-ai-takeoff-scenarios&quot;&gt;this article&lt;&#x2F;a&gt;, where the idea of homogenous take-off is introduced. Then, I outline two different arguments why you might update in the direction of homogenous take-off. For each of the arguments I mention key uncertainties that I have about the argument itself, as well as broader open questions.&lt;&#x2F;p&gt;
@@ -254,10 +254,10 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>Inductive bias of neural networks on 1D regression: an empirical examination</title>
 		<published>2022-06-01T00:00:00+00:00</published>
 		<updated>2022-06-01T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/inductive-bias/"/>
-		<id>https://inwaves.github.io/posts/inductive-bias/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/inductive-bias/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/inductive-bias/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/inductive-bias/">&lt;p&gt;The full write-up of my dissertation is now public &lt;a href=&quot;&#x2F;assets&#x2F;inductive-bias-of-nn.pdf&quot;&gt;here&lt;&#x2F;a&gt;. You can also find the code on &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;inwaves&#x2F;nn-inductive-bias-regression&quot;&gt;Github&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/inductive-bias/">&lt;p&gt;The full write-up of my dissertation is now public &lt;a href=&quot;&#x2F;assets&#x2F;inductive-bias-of-nn.pdf&quot;&gt;here&lt;&#x2F;a&gt;. You can also find the code on &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;inwaves&#x2F;nn-inductive-bias-regression&quot;&gt;Github&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Here is the abstract:&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Modern network architectures generalise well even when the size of the network is very large relative to the amount of data it is trained on. This contradicts the received wisdom from statistical learning theory that models with high capacity overfit training data and do poorly on test data. One explanation for why neural networks generalise so well comes in the form of an implicit bias of the optimisation process. Recent theoretical results pinpoint the bias of gradient descent optimisation toward a class of smooth functions called interpolating splines. In this paper, we conduct a large-scale empirical evaluation of these results in the univariate regression case when subjected to changes in the training set-up along several hyperparameters commonly tweaked in practice. We find that these results are robust for shallow networks, but that the bias seems to change as network depth is increased. We additionally highlight several areas that could be further explored in order to better understand this bias and to generate practical recommendations for future machine learning systems.&lt;&#x2F;p&gt;
@@ -268,10 +268,10 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>Non-factorised identifiable variational autoencoders for causal discovery and out-of-distribution generalisation</title>
 		<published>2022-03-01T00:00:00+00:00</published>
 		<updated>2022-03-01T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/icarl/"/>
-		<id>https://inwaves.github.io/posts/icarl/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/icarl/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/icarl/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/icarl/">&lt;p&gt;Abstract: &quot;In many situations, given a set of observations, we would like to find the factors which cause or influence the data we observe. To learn these factors, we can use a deep generative model such as a variational auto-encoder (VAE), which maps the data to a latent space. However, a limitation of the VAE is that it is not identifiable, in the sense that two different sets of parameters may yield the same model. To address this, it is possible to augment the VAE in such a way that it becomes identifiable while remaining capable of flexible representations. This paper explores invariant causal representation learning (ICaRL), an algorithm for causal representation learning with possible applications in causal discovery and out-of-distribution generalisation.&quot;&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/icarl/">&lt;p&gt;Abstract: &quot;In many situations, given a set of observations, we would like to find the factors which cause or influence the data we observe. To learn these factors, we can use a deep generative model such as a variational auto-encoder (VAE), which maps the data to a latent space. However, a limitation of the VAE is that it is not identifiable, in the sense that two different sets of parameters may yield the same model. To address this, it is possible to augment the VAE in such a way that it becomes identifiable while remaining capable of flexible representations. This paper explores invariant causal representation learning (ICaRL), an algorithm for causal representation learning with possible applications in causal discovery and out-of-distribution generalisation.&quot;&lt;&#x2F;p&gt;
 &lt;p&gt;Full &lt;a href=&quot;&#x2F;assets&#x2F;icarl.pdf&quot;&gt;write-up&lt;&#x2F;a&gt; and &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;inwaves&#x2F;icarl&quot;&gt;code&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
 	</entry>
@@ -279,10 +279,10 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>Are graph neural networks (GNNs) fundamentally bottlenecked?</title>
 		<published>2022-02-15T00:00:00+00:00</published>
 		<updated>2022-02-15T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/gnn-bottleneck/"/>
-		<id>https://inwaves.github.io/posts/gnn-bottleneck/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/gnn-bottleneck/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/gnn-bottleneck/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/gnn-bottleneck/">&lt;p&gt;Generally speaking, the performance of neural networks on various tasks scales with their depth. Deep learning has been wildly successful on classification and regression tasks, and most recently on generating novel input. How does scale affect graph neural networks (GNN), a type of neural network designed to take advantage of structured data, where interactions can be modelled as a graph? This project discusses the phenomena of oversmoothing and oversquashing observed in deep GNNs, and evaluates the performance of a hybrid architecture. GraphTrans (introduced in &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;proceedings.neurips.cc&#x2F;paper&#x2F;2021&#x2F;hash&#x2F;6e67691b60ed3e4a55935261314dd534-Abstract.html&quot;&gt;Wu et al. 2021&lt;&#x2F;a&gt;) is a GNN-transformer hybrid -- a GNN whose readout function is a transformer -- which has recently had promising benchmark results.&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/gnn-bottleneck/">&lt;p&gt;Generally speaking, the performance of neural networks on various tasks scales with their depth. Deep learning has been wildly successful on classification and regression tasks, and most recently on generating novel input. How does scale affect graph neural networks (GNN), a type of neural network designed to take advantage of structured data, where interactions can be modelled as a graph? This project discusses the phenomena of oversmoothing and oversquashing observed in deep GNNs, and evaluates the performance of a hybrid architecture. GraphTrans (introduced in &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;proceedings.neurips.cc&#x2F;paper&#x2F;2021&#x2F;hash&#x2F;6e67691b60ed3e4a55935261314dd534-Abstract.html&quot;&gt;Wu et al. 2021&lt;&#x2F;a&gt;) is a GNN-transformer hybrid -- a GNN whose readout function is a transformer -- which has recently had promising benchmark results.&lt;&#x2F;p&gt;
 &lt;p&gt;The full write-up is available at &lt;a href=&quot;&#x2F;assets&#x2F;mpnn.pdf&quot;&gt;this link&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
 	</entry>
@@ -290,10 +290,10 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>Sharpness-aware minimisation and label noise</title>
 		<published>2022-02-01T00:00:00+00:00</published>
 		<updated>2022-02-01T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/sam-noisy-labels/"/>
-		<id>https://inwaves.github.io/posts/sam-noisy-labels/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/sam-noisy-labels/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/sam-noisy-labels/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/sam-noisy-labels/">&lt;p&gt;Do flat minima generalise better? Is there a way to bias standard optimisation algorithms like stochastic gradient descent (SGD) to prefer flatter minima? Sharpness-aware minimisation (SAM), introduced by &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2010.01412&quot;&gt;Foret et al., 2020&lt;&#x2F;a&gt; is a modified version of SGD that reliably finds flat minima, resulting in improved performance. This project evaluates the performance of SAM on classification tasks where the labels are noisy -- meaning that they do not always represent the correct class.&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/sam-noisy-labels/">&lt;p&gt;Do flat minima generalise better? Is there a way to bias standard optimisation algorithms like stochastic gradient descent (SGD) to prefer flatter minima? Sharpness-aware minimisation (SAM), introduced by &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2010.01412&quot;&gt;Foret et al., 2020&lt;&#x2F;a&gt; is a modified version of SGD that reliably finds flat minima, resulting in improved performance. This project evaluates the performance of SAM on classification tasks where the labels are noisy -- meaning that they do not always represent the correct class.&lt;&#x2F;p&gt;
 &lt;p&gt;Full &lt;a href=&quot;&#x2F;assets&#x2F;sam.pdf&quot;&gt;write-up&lt;&#x2F;a&gt; and &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;inwaves&#x2F;sam-noisy-labels&quot;&gt;code&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
 	</entry>
@@ -301,20 +301,20 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>Comparing GPT-3 and RNNs as probabilistic generative models</title>
 		<published>2022-01-01T00:00:00+00:00</published>
 		<updated>2022-01-01T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/gpt-probabilistic/"/>
-		<id>https://inwaves.github.io/posts/gpt-probabilistic/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/gpt-probabilistic/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/gpt-probabilistic/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/gpt-probabilistic/">&lt;p&gt;An investigation of transformers&#x27; and RNNs&#x27; ability to model long-term dependencies through the lens of probabilistic modelling. You can find the write-up &lt;a href=&quot;&#x2F;assets&#x2F;gpt3rnn.pdf&quot;&gt;here&lt;&#x2F;a&gt;, and the code &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;inwaves&#x2F;prob-models&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/gpt-probabilistic/">&lt;p&gt;An investigation of transformers&#x27; and RNNs&#x27; ability to model long-term dependencies through the lens of probabilistic modelling. You can find the write-up &lt;a href=&quot;&#x2F;assets&#x2F;gpt3rnn.pdf&quot;&gt;here&lt;&#x2F;a&gt;, and the code &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;inwaves&#x2F;prob-models&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
 		<title>Investigating short-term climate forecasts with surrogate modelling</title>
 		<published>2021-12-20T00:00:00+00:00</published>
 		<updated>2021-12-20T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/climate-surrogate-model/"/>
-		<id>https://inwaves.github.io/posts/climate-surrogate-model/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/climate-surrogate-model/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/climate-surrogate-model/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/climate-surrogate-model/">&lt;p&gt;This project uses Gaussian processes (GPs) as surrogate models for accurate climate forecasting. We emulate the UKESM1.0 climate model for precipitation, surface temperature and snow thickness. Work in collaboration with ZI Attahiru, M Salam and K Spukas.&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/climate-surrogate-model/">&lt;p&gt;This project uses Gaussian processes (GPs) as surrogate models for accurate climate forecasting. We emulate the UKESM1.0 climate model for precipitation, surface temperature and snow thickness. Work in collaboration with ZI Attahiru, M Salam and K Spukas.&lt;&#x2F;p&gt;
 &lt;p&gt;Write-up &lt;a href=&quot;&#x2F;assets&#x2F;surrogate-modelling.pdf&quot;&gt;here&lt;&#x2F;a&gt;, codebase &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;inwaves&#x2F;climate-surrogate-model&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
 	</entry>
@@ -322,10 +322,10 @@ x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &amp;lt; P_\beta(R^l)
 		<title>Intelligent game playing with AI</title>
 		<published>2018-06-01T00:00:00+00:00</published>
 		<updated>2018-06-01T00:00:00+00:00</updated>
-		<link rel="alternate" type="text/html" href="https://inwaves.github.io/posts/intelligent-game-playing/"/>
-		<id>https://inwaves.github.io/posts/intelligent-game-playing/</id>
+		<link rel="alternate" type="text/html" href="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/intelligent-game-playing/"/>
+		<id>https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/intelligent-game-playing/</id>
     
-		<content type="html" xml:base="https://inwaves.github.io/posts/intelligent-game-playing/">&lt;p&gt;The full write-up of my undergraduate thesis is available &lt;a href=&quot;&#x2F;assets&#x2F;intelligent-game-playing.pdf&quot;&gt;here&lt;&#x2F;a&gt;. Here is an abstract:&lt;&#x2F;p&gt;
+		<content type="html" xml:base="https://hd54s5ck6r3jexi5.preview.dev.igent.ai/posts/intelligent-game-playing/">&lt;p&gt;The full write-up of my undergraduate thesis is available &lt;a href=&quot;&#x2F;assets&#x2F;intelligent-game-playing.pdf&quot;&gt;here&lt;&#x2F;a&gt;. Here is an abstract:&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Video-games contain a simulated reality not unlike ours, where the developer has control over constraints and parameters which are inaccessible in the outside world. They are generally structured around tasks that are challenging for humans, and in some cases prove to be more difficult than other activities to which our species is adapted. This makes games ideal for artificial intelligence research and benchmarking. In this project, we build an intelligent agent and test it using the General Video Game AI platform. The agent is a combination of two algorithms with an outstanding track record in decision-making and pathfinding: Monte Carlo Tree Search (MCTS) and A* search. MCTS was used by DeepMind in AlphaGo, the first intelligent agent to beat the human champion in the game of Go. A* is used widely in pathfinding problems in video-games, navigation and parsing grammars in Natural Language Processing. The hybrid agent is benchmarked against a standard implementation of MCTS.&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
