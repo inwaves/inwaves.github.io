@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  
+  
+    
+  
+  <meta name="description" content="Analysis of Google DeepMind&#x27;s mixture-of-depths technique for dynamically allocating compute in transformer language models">
+
+  <title>Understanding mixture-of-depths</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://inwaves.github.io/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://inwaves.github.io/img/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://inwaves.github.io/img/apple-touch-icon.png">
+  
+  <style>
+
+  /* light mode colors */
+  body {
+    --primary-color: #5871a2;
+    --primary-pale-color: #5871a233;
+    --primary-decoration-color: #5871a210;
+    --bg-color: #ffffff;
+    --text-color: #2f3030;
+    --text-pale-color: #767676;
+    --text-decoration-color: #a9a9a9;
+    --highlight-mark-color: #5f75b020;
+
+    --callout-note-color: #5871a2;
+    --callout-tip-color: #268556;
+    --callout-important-color: #885fc9;
+    --callout-warning-color: #ab6632;
+    --callout-caution-color: #c64e4e;
+  }
+
+  /* dark mode colors */
+  body.dark {
+    --primary-color: #6f8fd1;
+    --primary-pale-color: #6f8fd166;
+    --primary-decoration-color: #6f8fd112;
+    --bg-color: #1c1c1c;
+    --text-color: #c1c1c1;
+    --text-pale-color: #848484;
+    --text-decoration-color: #5f5f5f;
+    --highlight-mark-color: #8296cb3b;
+
+    --callout-note-color: #6f8fd1;
+    --callout-tip-color: #47976f;
+    --callout-important-color: #9776cd;
+    --callout-warning-color: #ad7a52;
+    --callout-caution-color: #d06161;
+  }
+
+  /* typography */
+  body {
+    --main-font: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --code-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    --homepage-max-width: 768px;
+    --main-max-width: 768px;
+    --avatar-size: 60px;
+    --font-size: 16px;
+    --line-height: 1.75;
+    --img-border-radius: 0px;
+    --detail-border-radius: 0px;
+    --dark-mode-img-brightness: 0.75;
+    --dark-mode-chart-brightness: 0.75;
+    --inline-code-border-radius: 2px;
+    --inline-code-bg-color: var(--primary-decoration-color);
+    --block-code-border-radius: 0px;
+    --block-code-border-color: var(--primary-color);
+    --detail-border-color: var(--primary-color);
+  }
+
+</style>
+
+  <link rel="stylesheet" href="https://inwaves.github.io/main.css">
+  
+
+<link id="hl" rel="stylesheet" type="text/css" href="/hl-light.css" />
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" integrity="sha384-HORx6nWi8j5/mYA+y57/9/CZc5z8HnEw4WUZWy5yOn9ToKBv1l58vJaufFAn9Zzi" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false },
+                { left: '\\(', right: '\\)', display: false },
+                { left: '\\[', right: '\\]', display: true }
+            ],
+            throwOnError: false
+        });
+    });
+</script>
+
+
+  
+</head>
+
+<body class="post">
+  
+  <script>
+    const theme = sessionStorage.getItem('theme');
+    const match = window.matchMedia("(prefers-color-scheme: dark)").matches
+    if ((theme && theme == 'dark') || (!theme && match)) {
+      document.body.classList.add('dark');
+      const hl = document.querySelector('link#hl');
+      if (hl) hl.href = 'https://inwaves.github.io/hl-dark.css';
+    }
+  </script>
+  
+  
+<div id="wrapper">
+  <div id="blank"></div>
+  <aside>
+    
+    
+    <nav>
+      <ul>
+        
+        <li>
+          <a class="h2" href="#setting-the-stage">Setting the stage</a>
+          
+        </li>
+        
+        <li>
+          <a class="h2" href="#mixture-of-depths">Mixture of depths</a>
+          
+        </li>
+        
+        <li>
+          <a class="h2" href="#routing-tokens">Routing tokens</a>
+          
+        </li>
+        
+        <li>
+          <a class="h2" href="#results">Results</a>
+          
+        </li>
+        
+        <li>
+          <a class="h2" href="#wrapping-up">Wrapping up</a>
+          
+        </li>
+        
+      </ul>
+    </nav>
+    
+    
+    <button id="back-to-top" aria-label="back to top">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+
+    </button>
+    
+  </aside>
+  <main>
+    
+<header>
+  <nav>
+    <a id="back-link" href="https:&#x2F;&#x2F;inwaves.github.io&#x2F;posts">← Back</a>
+  </nav>
+</header>
+
+
+    <div>
+      
+      
+      
+      
+      <div id="copy-cfg" style="display: none;" data-copy-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+" data-check-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+"></div>
+      
+      <article class="prose">
+        <h1>Understanding mixture-of-depths</h1>
+        <div id="post-info">
+          <div id="date">
+            <span id="publish">Apr 5, 2024</span>
+            </div>
+
+          
+        </div>
+
+        
+        
+
+        
+
+        <p>Google Deepmind recently released this paper: <a rel="nofollow noreferrer" href="https://arxiv.org/abs/2404.02258">Mixture-of-Depths: Dynamically allocating compute in transformer-based language models</a>.</p>
+<p>In a few words: relative to a vanilla transformer, you can train either (a) models with higher performance or (b) faster-to-run models with the same performance, using a technique called mixture-of-depths. Conceptually, the change is straightforward: for each transformer block, learn a routing mechanism that determines whether a given token goes through the block, or skips it – as in a residual connection.</p>
+<h2 id="setting-the-stage">Setting the stage<a class="zola-anchor" href="#setting-the-stage" aria-label="Anchor link for: setting-the-stage" style="visibility: hidden;"></a>
+</h2>
+<p>If you've been watching the machine learning space in the last 5 years or so, you'll have noticed language models becoming near-ubiquitous. And for good reason! They're unreasonably effective at general purpose tasks, so long as you can scale them and the datasets they're trained on to be large enough. We now also have a set of post-training techniques that make them even more capable and useful to end-users – RLHF, SFT on downstream tasks, prompt engineering – making them useful as general purpose chatbots, coding assistants, and other applications we haven't dreamt of yet.</p>
+<p>But the scaling part is kind of a big deal. The largest models in production today probably cost &gt;$100m to train, and have a non-negligible cost to re-train. This cost is a combination of training very large models (100s of billions of parameters) on very large datasets (10s of <em>trillions</em> of tokens) and likely for very many epochs. On one hand, these figures are likely going down, because hardware improvements (think NVIDIA's latest GTC) and algorithmic progress (making the models themselves more efficient) are chipping away at compute costs. On the other hand, there's higher demand for GPUs, we're training more and more complex systems, and there's an increasing number of companies wanting to explore what LLMs can do for them. If you can bring down the compute cost of training and serving a large language model, the entire ecosystem benefits.</p>
+<h2 id="mixture-of-depths">Mixture of depths<a class="zola-anchor" href="#mixture-of-depths" aria-label="Anchor link for: mixture-of-depths" style="visibility: hidden;"></a>
+</h2>
+<p>The starting intuition for the <a rel="nofollow noreferrer" href="https://arxiv.org/abs/2404.02258">Raposo et al. 2024</a> paper is that not all tokens in a text sequence should take the same amount of compute or time when making a prediction. Some are more important than others (we know this because self-attention works well), so we can try to translate this into compute efficiency gains.</p>
+<p>The term of art here is "conditional computation", the gist of which is that you can reduce total compute used by only expending it when needed, e.g. see <a rel="nofollow noreferrer" href="https://arxiv.org/abs/1511.06297">Bengio et al. 2016</a>. One problem with this is that we might not know in advance how much compute we need when we apply conditional computation – the computation graph is <em>dynamic</em>. This is bad because in large scale ML systems we want to maximise hardware utilisation, preferably knowing in advance how much memory or bandwidth we'll need for a particular computation.</p>
+<p>To avoid dynamic computation graphs, we can pre-specify a total compute budget, which doesn't change during training. We can tie this budget to the number of tokens in a sequence that can participate in a transformer block's computations – let's say $k$ of $T$ total tokens.</p>
+<p>Given this fixed budget, we can get transformers to learn to dynamically allocate compute to each input token, in each layer, i.e. which $k$ of the $T$ total tokens will participate in each block. Because not all tokens participate in every computation, less compute is required, and the number of FLOPs used during training is lower than for a vanilla transformer.</p>
+<p><img src="/images/mod-fig1.png" alt="MoD Figure 1" /></p>
+<p>The way you do this is through a routing mechanism: moving down through the network layers, each token either has the layer applied to it (just like a vanilla transformer, no changes there) or it passes through a residual connection (i.e. no computation is applied to it). The routing applies to entire transformer blocks, which comprise one attention layer, and one MLP.</p>
+<p>Routing is controlled by per-block routers – these generate a scalar weight for each token, the intuition for which is that router's "preference" for the token to participate in the computation. Given a bunch of these preference weights, identify the $k$ highest of them and select those tokens to participate in the block.</p>
+<h2 id="routing-tokens">Routing tokens<a class="zola-anchor" href="#routing-tokens" aria-label="Anchor link for: routing-tokens" style="visibility: hidden;"></a>
+</h2>
+<p>How do you route tokens in practice?</p>
+<p>You could do it stochastically by sampling the routing weights from a normal distribution - this turns out not to work so well - or you could learn the weights of the router as part of regular training.</p>
+<p>Specifically, let's say you have a set of token embeddings for a sequence of length $S$ in layer $l$:</p>
+<p>$$X^l={x_i^l|i=\overline{1,S}}$$</p>
+<p>Give each token embedding a router weight generated by a linear projection:</p>
+<p>$$r_i^l = w_\theta^T x_i^l$$</p>
+<p>Now taking $P_\beta(R^l)$ as the $\beta$-th percentile of the set of router weights $R^l$, where $\beta = 1 - \frac{k}{S}$, each block's output for a given token is:</p>
+<p>$$x_i^{l+1} = \begin{cases}
+r_i^lf_i(\tilde X^l) + x_i^l, \quad \text{if}\ r_i^l &gt; P_\beta(R^l) \
+x_i^l, \quad\quad\quad\quad\quad\ \ \ \text{if}\  r_i^l &lt; P_\beta(R^l)
+\end{cases}$$</p>
+<p>In short:</p>
+<ul>
+<li>we use the percentile to pick the top-k tokens;</li>
+<li>the $f_i$ function corresponds to the transformer block;</li>
+<li>the $\tilde X$ vector corresponds to the tokens that this token depends on (because of attention) – there are $k$ of them;</li>
+<li>we multiply the block output by the router weight so that the latter gets added to the computational graph and acted on during backprop, taking gradients with respect to this parameter just like we do with others;</li>
+</ul>
+<p>I think this is a pretty clean solution – it's mathematically unsophisticated, and seems to work well in practice! There is just one <em>small</em> snag: when we use the top-$k$ weights to determine which tokens take part in a block, the decision for a token $x_i$ depends on tokens that follow it, like $x_{i+1}, x_{i+2}$ and so on! After all, the routing mechanism might just prefer them more.</p>
+<p>This breaks autoregressive sampling, i.e. where we generate one token, then we use it to generate another, and another, left-to-right. One solution to this is to add a second classifier to each router to try and predict whether given a token as input that token will be in the top-$k$ or not.</p>
+<h2 id="results">Results<a class="zola-anchor" href="#results" aria-label="Anchor link for: results" style="visibility: hidden;"></a>
+</h2>
+<p>It's a good idea to go read the original paper for a nuanced interpretation of the results, but a few things seem worth mentioning here:</p>
+<ol>
+<li>
+<p>Optimal mixture-of-depths (MoD) transformers get lower loss than optimal baselines (i.e. optimal-compute trained vanilla transformers), and they have more parameters. This means you can either have models which for the same compute cost have lower loss/higher performance, or you can have smaller, cheaper models that have the same loss as a more expensive, larger baseline!</p>
+<p>One way to look at this is that for a given wall-clock time spent during training, an MoD model will get more training steps in than a vanilla model, because each step takes less time. So the MoD model trains for longer!</p>
+</li>
+<li>
+<p>The best MoD variant they found routed every other block (and left other block as in vanilla transformers), and used (by my lights) <em>super</em> aggressive top-k choices: only 12.5% of all tokens got processed by the routed blocks! That means 87.5% get skipped by every other transformer block.
+<img src="/images/mod-fig5.png" alt="MoD Figure 5" /></p>
+</li>
+<li>
+<p>You can combine mixture-of-depths and mixture-of-experts models to get an even handier acronym: MoDE. There's two architecture ideas, one of which seems to work better than the other.
+<img src="/images/mod-fig7.png" alt="MoD Figure 7" /></p>
+</li>
+</ol>
+<h2 id="wrapping-up">Wrapping up<a class="zola-anchor" href="#wrapping-up" aria-label="Anchor link for: wrapping-up" style="visibility: hidden;"></a>
+</h2>
+<p>I like the simplicity of the routing – it's basically a learned form of dropout, calculated per token, per block. It's an inexpensive intervention that reduces compute cost and lets us train better models. You could argue that not much is new here, but lots of great ideas seem obvious in retrospect – like <a rel="nofollow noreferrer" href="https://arxiv.org/abs/1512.03385">ResNets</a> adding the residual connection for the first time.</p>
+<p>One point to be mindful of when making this kind of intervention is whether it negatively affects downstream behaviour. I expect that MoDE had been used internally at GDM for a while before this paper was released, &amp; so I expect to see analyses in this direction soon.</p>
+
+      </article>
+
+      
+      
+
+      
+      
+      <div class="giscus"></div>
+      
+      
+    </div>
+
+    
+
+
+<footer>
+  <div class="left">
+    <div class="copyright">
+      © 2025 Andrei Alexandru
+      
+      <span>|</span>
+      Built with <a href="https://www.getzola.org" rel="noreferrer" target="_blank">zola</a> and <a href="https://github.com/isunjn/serene" rel="noreferrer" target="_blank">serene</a>
+      
+    </div>
+  </div>
+
+  <div class="right">
+    
+    
+      
+    
+    
+    <a id="rss-btn" href="https://inwaves.github.io/posts/feed.xml">RSS</a>
+    
+    
+
+    
+    
+    
+    <button id="theme-toggle" aria-label="theme switch">
+      <span class="moon-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z" fill="currentColor"></path></svg>
+</span>
+      <span class="sun-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z" fill="currentColor"></path></svg>
+</span>
+    </button>
+    
+  </div>
+</footer>
+
+
+
+
+<dialog id="rss-mask">
+  <div>
+    <a href="https:&#x2F;&#x2F;inwaves.github.io&#x2F;posts&#x2F;feed.xml">https:&#x2F;&#x2F;inwaves.github.io&#x2F;posts&#x2F;feed.xml</a>
+    
+    
+    <button autofocus aria-label="copy" data-link="https:&#x2F;&#x2F;inwaves.github.io&#x2F;posts&#x2F;feed.xml" data-copy-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+" data-check-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+" >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z" fill="currentColor"></path></svg>
+
+    </button>
+  </div>
+</dialog>
+
+
+
+  </main>
+</div>
+
+  
+<script src="/js/lightense.min.js"></script>
+
+
+  <script src="https://inwaves.github.io/js/main.js"></script>
+</body>
+
+</html>
