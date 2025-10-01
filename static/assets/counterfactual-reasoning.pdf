@@ -1,0 +1,349 @@
+Counterfactual reasoning
+and learning systems
+Bottou, Peters et al.
+
+Presented for R255: Causal Inference by Denizhan Akar and Andrei Alexandru
+
+1
+
+Part I: counterfactual reasoning
+Denizhan Akar
+
+2
+
+Causality… affects
+-
+
+3
+
+Part II: counterfactual analysis
+Andrei Alexandru
+
+4
+
+Enter causal inference
+-
+
+We’ve set the stage: we want to find some ad layout L which maximises click
+yield Y* without running A/B testing
+-
+
+-
+
+We want to use counterfactual reasoning to understand how changes to the
+layout would impact click yield
+-
+
+-
+
+Reminder: A/B testing means that half of all users see layout A, other half layout B
+
+Using data we’ve already gathered!
+
+Will keep technical notes to a minimum, but the full derivations are not hard to
+follow along if you’re interested!
+
+5
+
+Counterfactual reasoning
+-
+
+“Counterfactual” is shorthand for “what would have happened if…?”
+Example 1: training a neural network with backprop can be seen through a
+counterfactual lens
+-
+
+We “play” the data
+We intervene on the parameters
+We “replay” the data
+Rinse and repeat
+
+6
+
+Counterfactual reasoning
+-
+
+“Counterfactual” is shorthand for “what would have happened if…?”
+Example 2: reweighting randomised trials
+-
+
+Say you split patients equally to two treatments, A and B
+Overall effectiveness of the experiment is
+What if instead we want to find the effectiveness of some experiment where we apply
+treatment A with probability p, otherwise treatment B?
+Answer: reweight the original trials:
+
+7
+
+Back to our ad model…
+-
+
+We start from a structural equation model as above
+This generates a Markov factorisation – ω is just shorthand for the joint
+distribution of all variables
+
+-
+
+We model an intervention as changing one factor in the Markov factorisation,
+in this case changing the scoring function
+
+8
+
+-
+
+Given this alternative factorisation, we want to estimate some desired quantity
+In our case, a good choice is click yield – the number of ad clicks per page
+
+-
+
+What’s going on here?
+-
+
+-
+
+P*(ω) is being substituted with P(ω) multiplied by some ratio
+We sample from P(ω) because we know it (the instantiation to actual values of q_i, x_i etc.)
+y is the number of clicks
+
+If this looks familiar, it’s because it’s importance sampling
+9
+
+Importance sampling
+-
+
+More generally, we can estimate the counterfactual expectation of any
+quantity l(ω):
+
+-
+
+With weights:
+
+-
+
+Great, we’re done!
+10
+
+Not so fast
+-
+
+Our sampling weights depend on factors which are stochastic in nature, there
+is noise in their output
+We want the numerator, P*, to be non-zero whenever P is non-zero
+Which means that the counterfactual factors need to be stochastic
+themselves, i.e. our experiment needs to be randomised
+-
+
+-
+
+This means I can’t just cherry-pick some values, run it once, get some result and call it a day
+I must randomise it and run it multiple times to get something decent out
+
+Because of this randomness, a single estimate of our quantity of interest is no
+longer enough; we need to know how confident we are in that estimate
+
+11
+
+Confidence intervals
+-
+
+There’s a clever way of getting confidence intervals for any distribution given
+it has a finite variance: you use the central limit theorem
+Reminder: CLT says that given a sequence of i.i.d random variables
+the random variable
+converges in distribution to a normal N(0, σ2)
+as the length of the sequence goes to infinity1
+Problem: in importance sampling, the two distributions need to overlap fairly
+well for us to get an unbiased estimator
+
+-
+
+-
+
+1
+
+Click here for a refresher
+
+12
+
+What’s the issue?
+-
+
+-
+
+The counterfactual
+distribution and the actual
+distribution of our model
+don’t always overlap
+When the counterfactual
+distribution assigns
+probability mass in regions
+where the original
+distribution has none, our
+weights are very large
+13
+
+What might this look like in practice?
+-
+
+-
+
+Imagine that your counterfactual is a
+change that works so well it gives
+you a click yield in the millions,
+when your previous highest value
+for the same amount of traffic was
+1,000.
+It’s really really unlikely that your
+original distribution assigns any real
+probability to this scenario
+But your counterfactual says that’s
+possible; in fact, that’s the whole
+point!
+14
+
+Solution
+-
+
+Clip the weights such that in those domains that are poorly explored by the
+original distribution, the resulting weight is 0.
+
+-
+
+With R being an empirically chosen reweighting ratio
+-
+
+This is a limitation: R should in theory be chosen before seeing the data, but the authors select
+this such that they get consistent results in practice
+
+15
+
+Solution
+-
+
+Now, decompose the click yield we want to estimate, Y*, into two terms:
+
+-
+
+Where Ω_R is the set of weights ω that satisfy the constraint on the previous
+slide
+We call Y* bar the clipped expectation, and it’s much easier to estimate
+because clipped weights are bounded by R
+
+-
+
+16
+
+Confidence intervals
+-
+
+We now have a quantity with finite variance, to which we can apply the central
+limit theorem to get confidence intervals
+The paper uses two types of confidence intervals, which differ slightly in how
+the quantity Y* is bounded
+There’s an inner confidence interval that captures the uncertainty from not
+exploring the domain G_R that is high in probability in P* but not in P
+-
+
+-
+
+If this is wide, we may have to adjust how we collect data so we get better coverage
+
+There’s an outer confidence interval that captures uncertainty from a limited
+sample size
+
+17
+
+An experiment: mainline reserve
+-
+
+Mainline reserve := a threshold that the rank-score of an ad needs to clear for
+it to be included in the mainline – the main search section – rather than in the
+sidebar
+-
+
+Scale this up: fewer ads clear the threshold, fewer ads in the main search section
+Scale down: more ads clear the threshold and end up in the mainline section
+
+18
+
+An experiment: mainline reserve
+-
+
+Experiment: scale the mainline reserve according to some multiplier
+-
+
+-
+
+Where ρ, σ are hyperparameters
+
+Collect data using ρ = 1, σ = 0.3. (i.e. generate ads, let users search, record
+click yield)
+Use this to estimate what the click yield would have been given a different ρ*,
+σ*
+
+19
+
+An experiment: mainline reserve
+
+20
+
+Other things we could do
+-
+
+This experiment kept σ* = σ, but we could change it to see what would
+happen if the reserve fluctuated more widely
+-
+
+-
+
+It would also be interesting to ask the question “What would click yield be if we had shown
+some people more mainline ads, other people fewer”
+
+We could try to estimate an exact value of the mainline reserve without
+randomising
+We could add more dimensions along which to experiment – not just
+changing the score function
+-
+
+The difficulty here is that we’d have to effectively collect more data exploring multiple
+dimensions
+
+21
+
+Next…
+-
+
+-
+
+The next section in the paper shows ways to use the causal graph that our
+structural equation model induces to improve this counterfactual analysis
+Better reweighting variables
+Better confidence intervals using invariant predictors
+
+“Learning” section explores how to fit a model to the counterfactual
+distribution to predict a variable of interest
+
+22
+
+Conclusion
+-
+
+Using causal inference techniques enables you to reason counterfactually –
+about things that haven’t happened
+We can apply this in an advertising context to find good ad layouts that
+maximise click yield
+In theory we could approximate a counterfactual estimate of the click yield
+simply by sampling from our existing distribution and reweighting the samples
+In practice, importance sampling has a key limitation: the two distributions
+must overlap somewhat, otherwise our variance blows up
+Clipping the weights fixes this, and enables you to get an estimate +
+confidence intervals on the estimate
+23
+
+Extra slides
+
+24
+
+25
+
+
