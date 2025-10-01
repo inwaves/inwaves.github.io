@@ -1,0 +1,66 @@
+# serene v5.4.3
+#
+# - docs: https://github.com/isunjn/serene/blob/latest/USAGE.md
+# - check for updates: https://github.com/isunjn/serene/releases
+#
+#=========================================================================================
+
+base_url = "https://inwaves.github.io"
+title = "Andrei Alexandru"
+description = "AI safety research"
+default_language = "en"
+theme = "serene"
+output_dir = "public"
+compile_sass = true
+minify_html = false # Keep this false, as it may cause issues with some styles
+build_search_index = false # Keep this false, search is temporarily unsupported
+generate_feeds = false # Will enable this in the posts section instead
+feed_filenames = ["feed.xml"]
+taxonomies = [{ name = "tags" }, { name = "categories" }]
+
+[markdown]
+highlight_code = true
+highlight_theme = "css"
+extra_syntaxes_and_themes = ["themes/serene/highlight_themes"]
+highlight_themes_css = [
+  { theme = "serene-light", filename = "hl-light.css" },
+  { theme = "serene-dark", filename = "hl-dark.css" },
+]
+render_emoji = false
+external_links_target_blank = false
+external_links_no_follow = true
+external_links_no_referrer = true
+smart_punctuation = false
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+#=========================================================================================
+
+[extra]
+
+sections = [
+  { name = "posts", path = "/posts", is_external = false },
+  { name = "about", path = "/about", is_external = false },
+  { name = "now", path = "/now", is_external = false },
+  { name = "cool things", path = "/cool_things", is_external = false },
+  { name = "presentations", path = "/presentations", is_external = false },
+  { name = "github", path = "https://github.com/inwaves", is_external = true },
+  { name = "linkedin", path = "https://www.linkedin.com/in/aalexaa", is_external = true },
+]
+blog_section_path = "/posts"
+
+back_link_text = "Back"
+force_theme = false # false | "light" | "dark"
+
+footer_copyright = "© 2025 Andrei Alexandru"
+footer_credits = true
+
+not_found_error_text = "404 Not Found"
+not_found_recover_text = "« back to home »"
+
+reaction = false
+reaction_align = "right"
+reaction_endpoint = ""
