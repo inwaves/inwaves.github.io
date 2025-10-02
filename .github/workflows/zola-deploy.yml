@@ -26,6 +26,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Initialize submodules
+        run: git submodule update --init --recursive
+
       - name: Setup Zola
         uses: taiki-e/install-action@v2
         with:
