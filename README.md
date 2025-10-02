@@ -1,56 +1,78 @@
-# Chirpy Starter
+# Andrei Alexandru's Personal Website
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+This is a personal website and technical blog focused on AI safety research.
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders
-`_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file
-from the theme's gem. If you have ever installed this theme gem, you can use the command
-`bundle info --path jekyll-theme-chirpy` to locate these files.
+## Technology Stack
 
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being
-able to enjoy the out-of-the-box experience when using feature-rich themes.
+- **Static Site Generator:** [Zola](https://www.getzola.org/) v0.19.2
+- **Theme:** [Serene](https://github.com/isunjn/serene) v5.4.3
+- **Hosting:** GitHub Pages
+- **Deployment:** GitHub Actions
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your
-Jekyll site. The following is a list of targets:
+## Features
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
+- Blog posts with categories and tags
+- Math rendering with KaTeX
+- Syntax highlighting with custom themes
+- Table of contents
+- Comment system (Giscus)
+- RSS feed generation
+- Light/dark theme switching
+- Responsive design
+
+## Local Development
+
+### Prerequisites
+
+- [Zola](https://www.getzola.org/documentation/getting-started/installation/) v0.19.2 or later
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/inwaves/inwaves.github.io.git
+cd inwaves.github.io
+
+# Initialize the theme submodule
+git submodule update --init --recursive
+
+# Build the site
+zola build
+
+# Serve locally (note: for local development, set base_url appropriately)
+zola serve
 ```
 
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the
-latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+### Development Notes
 
-## Prerequisites
+- The `base_url` in `config.toml` should be set to your development URL for local testing
+- For production deployment, the GitHub Actions workflow automatically sets it to `https://inwaves.github.io`
+- Static assets are in the `static/` directory
+- Content is in the `content/` directory (posts in `content/posts/`)
 
-Follow the instructions in the [Jekyll Docs](https://jekyllrb.com/docs/installation/) to complete the installation of
-the basic environment. [Git](https://git-scm.com/) also needs to be installed.
+## Content Structure
 
-## Installation
-
-Sign in to GitHub and [**use this template**][use-template] to generate a brand new repository and name it
-`USERNAME.github.io`, where `USERNAME` represents your GitHub username.
-
-Then clone it to your local machine and run:
-
-```console
-$ bundle
+```
+content/
+├── _index.md           # Home page
+├── posts/              # Blog posts
+│   ├── _index.md       # Posts section config
+│   └── *.md            # Individual posts
+├── about/              # About page
+├── now/                # Now page
+├── cool_things/        # Cool things page
+└── presentations/      # Presentations page
+    └── items.toml      # Presentations collection
 ```
 
-## Usage
+## Deployment
 
-Please see the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy#documentation).
+The site automatically deploys to GitHub Pages when changes are pushed to the `master` branch via GitHub Actions.
 
 ## License
 
-This work is published under [MIT][mit] License.
+This work is published under [MIT License](LICENSE).
 
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[use-template]: https://github.com/cotes2020/chirpy-starter/generate
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+## Previous Version
+
+This site was previously built with Jekyll and the Chirpy theme. The migration to Zola was completed in October 2025.
