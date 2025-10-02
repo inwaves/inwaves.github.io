@@ -1,0 +1,20 @@
+[[collection]]
+type = "card_simple"
+title = "Inference time intervention: eliciting truthful answers from a language model"
+date = "2023"
+link = "https://proceedings.neurips.cc/paper_files/paper/2023/hash/81b8390039b7302c909cb769f8b6cd93-Abstract-Conference.html"
+content = "Kenneth Li, Oam Patel et al., 2023. [video](https://youtu.be/HGAbaz97yTY) | [slides](/assets/inference-time-intervention.pdf)"
+
+[[collection]]
+type = "card_simple"
+title = "Deep equals shallow for ReLU networks in kernel regimes"
+date = "2021"
+link = "https://arxiv.org/abs/2009.14397"
+content = "Alberto Bietti and Francis Bach, 2021. [video](https://youtu.be/JKKw6CvaI5o)"
+
+[[collection]]
+type = "card_simple"
+title = "Counterfactual reasoning and learning systems"
+date = "2021"
+link = "https://www.microsoft.com/en-us/research/wp-content/uploads/2012/09/1209.2355v1.pdf"
+content = "Leon Bottou, Jonas Peters et al., 2012. [slides](/assets/counterfactual-reasoning.pdf). Joint presentation with Denizhan Akar."
