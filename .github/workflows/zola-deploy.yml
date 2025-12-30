@@ -36,9 +36,11 @@ jobs:
 
       - name: Build site
         run: |
-          # Set production base_url
-          sed -i 's|base_url = ".*"|base_url = "https://inwaves.github.io"|g' config.toml
+          # Set production base_url for custom domain
+          sed -i 's|base_url = ".*"|base_url = "https://inwaves.io"|g' config.toml
           zola build
+          # Ensure CNAME is in output directory for GitHub Pages custom domain
+          cp CNAME public/CNAME
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
