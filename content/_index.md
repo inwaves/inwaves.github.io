@@ -8,7 +8,7 @@ footer = false
 name = "Andrei Alexandru"
 id = "inwaves"
 bio = "AI safety research"
-avatar = "img/andrei.png"
+avatar = "images/andrei.png"
 links = [
     { name = "GitHub", icon = "github", url = "https://github.com/inwaves" },
     { name = "LinkedIn", icon = "linkedin", url = "https://www.linkedin.com/in/aalexaa" },
