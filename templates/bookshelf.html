@@ -1,0 +1,387 @@
+{% import "macros/prose.html" as macros %}
+{% extends "_base.html" %}
+
+{% block page %}prose-page{% endblock page %}
+{% block lang -%}
+{%- if section.extra.lang %}{{section.extra.lang}}{% else %}{{section.lang}}{% endif -%}
+{%- endblock lang %}
+{% block title %}{{ section.title }}{% endblock title %}
+{% block desc %}
+  {% if section.description %}
+    {% set desc = section.description %}
+  {% else %}
+    {% set desc = config.description %}
+  {% endif %}
+  <meta name="description" content="{{ desc }}">
+{% endblock desc %}
+
+{% block head %}
+<style>
+  /* Bookshelf-specific styles */
+  .genre-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  
+  .genre-filter {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background: var(--bg-color);
+    color: var(--text-pale-color);
+    border: 1.5px solid var(--text-decoration-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    font-family: var(--main-font);
+  }
+  
+  .genre-filter:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .genre-filter.active {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+  }
+  
+  .bookshelf-controls {
+    margin: 1.5rem 0;
+  }
+  
+  .bookshelf-controls input {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1.5px solid var(--primary-color);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-family: var(--main-font);
+  }
+  
+  .filter-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-pale-color);
+    font-family: var(--main-font);
+  }
+  
+  .filter-header button {
+    padding: 0.5rem 1rem;
+    background: var(--bg-color);
+    color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: var(--main-font);
+  }
+  
+  .filter-header button:hover {
+    background: var(--primary-pale-color);
+  }
+  
+  .bookshelf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+  
+  .book-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .book-cover {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background: var(--primary-decoration-color);
+  }
+  
+  .book-cover-placeholder {
+    width: 100%;
+    aspect-ratio: 2/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-decoration-color) 0%, var(--text-decoration-color) 100%);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-pale-color);
+    line-height: 1.3;
+    font-family: var(--main-font);
+  }
+  
+  .book-info {
+    margin-top: 0.5rem;
+  }
+  
+  .book-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-family: var(--main-font);
+  }
+  
+  .book-author {
+    font-size: 0.75rem;
+    color: var(--text-pale-color);
+    margin-top: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-family: var(--main-font);
+  }
+  
+  .bookshelf-stats {
+    font-size: 0.9rem;
+    color: var(--text-pale-color);
+    margin-bottom: 1rem;
+    font-family: var(--main-font);
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-pale-color);
+    display: none;
+    font-family: var(--main-font);
+  }
+  
+  @media (max-width: 600px) {
+    .bookshelf-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+    }
+  }
+</style>
+{% endblock head %}
+
+{% block content %}
+<div id="wrapper">
+  <main>
+    {{ macros::back_link(path = get_url(path="/")) }}
+    {% include "_section_title.html" %}
+    
+    <article class="prose">
+      {{ section.content | safe }}
+      
+      <div class="bookshelf-stats" id="stats">
+        Loading books...
+      </div>
+      
+      <div class="bookshelf-controls">
+        <input type="text" id="search" placeholder="Search by title or author..." autocomplete="off">
+        
+        <div class="filter-header">
+          <span>Filter by genre:</span>
+          <button id="clear-genres">Clear filters</button>
+        </div>
+        
+        <div class="genre-filters" id="genre-filters">
+        </div>
+      </div>
+      
+      <div class="bookshelf-grid" id="bookshelf">
+      </div>
+      
+      <div class="no-results" id="no-results">
+        No books found matching your search or filters.
+      </div>
+    </article>
+
+    {% include "_footer.html" %}
+  </main>
+</div>
+
+<script>
+  let allBooks = [];
+  let activeGenres = new Set();
+  let searchQuery = '';
+  
+  // Map Open Library subjects to high-level genres
+  const genreMapping = {
+    'Fiction': ['Fiction', 'American fiction', 'British fiction', 'Novels', 'Short stories', 'Fiction in English'],
+    'Science Fiction': ['Science fiction', 'Science Fiction', 'American Science fiction', 'Fiction, science fiction'],
+    'Philosophy': ['Philosophy', 'Ethics', 'Aesthetics', 'Stoics', 'Existentialism', 'German Philosophy'],
+    'Biography': ['Biography', 'Autobiography', 'Biography & Autobiography', 'Biographical fiction'],
+    'Psychology': ['Psychology', 'Cognitive science', 'Artificial intelligence', 'Neurosciences'],
+    'History': ['History', 'World history', 'Modern Civilization', 'Historical Chronology'],
+    'Art & Photography': ['Art', 'Painting', 'Photography', 'Artistic Photography', 'Arts'],
+    'Buddhism & Meditation': ['Buddhism', 'Meditation', 'Zen Buddhism', 'Spiritual life'],
+    'Self-Improvement': ['Self-Improvement', 'Success', 'Conduct of life', 'Personal Growth'],
+    'Business': ['Business', 'Entrepreneurship', 'Leadership', 'Management'],
+    'Science': ['Science', 'Physics', 'Mathematics', 'Calculus', 'Biology'],
+    'Literature': ['Poetry', 'American literature', 'English literature', 'Essays'],
+    'Drama': ['Drama', 'Plays', 'Theater'],
+    'Politics': ['Politics', 'World politics', 'Political science'],
+    'Classics': ['Classical literature', 'Greek mythology', 'Roman Empire', 'Mythology']
+  };
+  
+  function categorizeBook(book) {
+    const genres = new Set();
+    
+    book.subjects.forEach(subject => {
+      for (const [genre, keywords] of Object.entries(genreMapping)) {
+        if (keywords.some(keyword => 
+          subject.toLowerCase().includes(keyword.toLowerCase()) ||
+          keyword.toLowerCase().includes(subject.toLowerCase())
+        )) {
+          genres.add(genre);
+        }
+      }
+    });
+    
+    return Array.from(genres);
+  }
+  
+  async function loadBooks() {
+    try {
+      const response = await fetch('/data/books.json');
+      allBooks = await response.json();
+      
+      // Add genres to each book
+      allBooks.forEach(book => {
+        book.genres = categorizeBook(book);
+      });
+      
+      // Extract all unique genres
+      const allGenres = new Set();
+      allBooks.forEach(book => {
+        book.genres.forEach(genre => allGenres.add(genre));
+      });
+      
+      // Display genre filters
+      const genreContainer = document.getElementById('genre-filters');
+      const sortedGenres = Array.from(allGenres).sort();
+      genreContainer.innerHTML = sortedGenres.map(genre => {
+        const count = allBooks.filter(b => b.genres.includes(genre)).length;
+        return `<button class="genre-filter" data-genre="${genre}">${genre} (${count})</button>`;
+      }).join('');
+      
+      // Add click handlers
+      document.querySelectorAll('.genre-filter').forEach(btn => {
+        btn.addEventListener('click', () => toggleGenre(btn.dataset.genre, btn));
+      });
+      
+      document.getElementById('stats').textContent = 
+        `${allBooks.length} books in the collection`;
+      
+      renderBooks();
+    } catch (error) {
+      console.error('Failed to load books:', error);
+      document.getElementById('stats').textContent = 'Failed to load books';
+    }
+  }
+  
+  function toggleGenre(genre, button) {
+    if (activeGenres.has(genre)) {
+      activeGenres.delete(genre);
+      button.classList.remove('active');
+    } else {
+      activeGenres.add(genre);
+      button.classList.add('active');
+    }
+    renderBooks();
+  }
+  
+  function clearGenres() {
+    activeGenres.clear();
+    document.querySelectorAll('.genre-filter').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    renderBooks();
+  }
+  
+  function renderBooks() {
+    const container = document.getElementById('bookshelf');
+    const noResults = document.getElementById('no-results');
+    
+    let filtered = allBooks;
+    
+    // Apply genre filters (OR logic - book must have at least one active genre)
+    if (activeGenres.size > 0) {
+      filtered = filtered.filter(book => {
+        return book.genres.some(genre => activeGenres.has(genre));
+      });
+    }
+    
+    // Apply search filter
+    const q = searchQuery.toLowerCase().trim();
+    if (q) {
+      filtered = filtered.filter(book => {
+        const titleMatch = book.title.toLowerCase().includes(q);
+        const authorMatch = book.authors.some(a => a.toLowerCase().includes(q));
+        return titleMatch || authorMatch;
+      });
+    }
+    
+    if (filtered.length === 0) {
+      container.innerHTML = '';
+      noResults.style.display = 'block';
+      return;
+    }
+    
+    noResults.style.display = 'none';
+    
+    // Shuffle for variety
+    const shuffled = filtered.sort(() => Math.random() - 0.5);
+    
+    container.innerHTML = shuffled.map(book => {
+      const authors = book.authors.length > 0 
+        ? book.authors.join(', ') 
+        : 'Unknown Author';
+      
+      const coverHtml = book.cover_url 
+        ? `<img class="book-cover" src="${book.cover_url}" alt="${book.title}" loading="lazy" onerror="this.outerHTML='<div class=\\'book-cover-placeholder\\'>${book.title}</div>'">`
+        : `<div class="book-cover-placeholder">${book.title}</div>`;
+      
+      return `
+        <a href="${book.goodreads_url}" target="_blank" rel="noopener" class="book-card">
+          ${coverHtml}
+          <div class="book-info">
+            <div class="book-title">${book.title}</div>
+            <div class="book-author">${authors}</div>
+          </div>
+        </a>
+      `;
+    }).join('');
+  }
+  
+  document.getElementById('search').addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    renderBooks();
+  });
+  
+  document.getElementById('clear-genres').addEventListener('click', clearGenres);
+  
+  loadBooks();
+</script>
+{% endblock content %}
