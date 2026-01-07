@@ -75,4 +75,4 @@ This work is published under [MIT License](LICENSE).
 
 ## Previous Version
 
-This site was previously built with Jekyll and the Chirpy theme. The migration to Zola was completed in October 2025.
+This site was previously built with Jekyll and the Chirpy theme. The migration to Zola was completed in December 2025.
