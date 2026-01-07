@@ -47,13 +47,14 @@ sections = [
   { name = "now", path = "/now", is_external = false },
   { name = "cool things", path = "/cool_things", is_external = false },
   { name = "presentations", path = "/presentations", is_external = false },
+  { name = "bookshelf", path = "/bookshelf", is_external = false },
 ]
 blog_section_path = "/posts"
 
 back_link_text = "Back"
 force_theme = false # false | "light" | "dark"
 
-footer_copyright = "© 2025 Andrei Alexandru"
+footer_copyright = "© 2026 Andrei Alexandru"
 footer_credits = true
 
 not_found_error_text = "404 Not Found"

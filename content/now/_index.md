@@ -13,6 +13,9 @@ copy = false
 comment = false
 +++
 
+**07/01/26**
+- As always, personal websites end up neglected! I've been working on Maestro at [iGent AI](https://igent.ai/), trying to understand agentic coding behaviour on complex, long-context tasks. 
+
 **11/04/23**
 - I recently started on the dangerous capability evaluations team at OpenAI.
 
