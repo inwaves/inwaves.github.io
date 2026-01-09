@@ -12,5 +12,3 @@ math = false
 copy = false
 comment = false
 +++
-
-Browse through my personal book collection. Click on any book to see it on Goodreads.
