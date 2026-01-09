@@ -58,7 +58,7 @@ This site is built with Zola and uses the [Serene](https://github.com/isunjn/ser
 Have thoughts, suggestions, or feedback you'd like to share? Use the form below to send me a message anonymously – your identity won't be revealed.
 
 <!-- TODO: Replace YOUR_FORM_ID with your actual Formspree form ID from https://formspree.io -->
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="max-width: 500px;">
+<form action="https://formspree.io/f/mojjaeke" method="POST" style="max-width: 500px;">
   <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
   <input type="hidden" name="_subject" value="Anonymous Feedback from inwaves.io">
   <textarea 
