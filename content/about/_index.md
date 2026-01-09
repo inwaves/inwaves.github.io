@@ -48,16 +48,8 @@ No About page is complete without facts of various degrees of utility:
 ## Reaching out
 You can email me at andrei [at] inwaves.io. I'm also on [LinkedIn](https://www.linkedin.com/in/aalexaa/), [Github](https://github.com/inwaves) and [LessWrong](https://www.lesswrong.com/users/inwaves).
 
-## About this site
-This site is built with Zola and uses the [Serene](https://github.com/isunjn/serene) theme.
+If you prefer, you can leave me anonymous feedback or questions using this form.
 
----
-
-## Anonymous Feedback
-
-Have thoughts, suggestions, or feedback you'd like to share? Use the form below to send me a message anonymously – your identity won't be revealed.
-
-<!-- TODO: Replace YOUR_FORM_ID with your actual Formspree form ID from https://formspree.io -->
 <form action="https://formspree.io/f/mojjaeke" method="POST" style="max-width: 500px;">
   <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
   <input type="hidden" name="_subject" value="Anonymous Feedback from inwaves.io">
@@ -75,3 +67,6 @@ Have thoughts, suggestions, or feedback you'd like to share? Use the form below 
     Send Feedback
   </button>
 </form>
+
+## About this site
+This site is built with Zola and uses the [Serene](https://github.com/isunjn/serene) theme.
