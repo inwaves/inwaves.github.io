@@ -50,3 +50,28 @@ You can email me at andrei [at] inwaves.io. I'm also on [LinkedIn](https://www.l
 
 ## About this site
 This site is built with Zola and uses the [Serene](https://github.com/isunjn/serene) theme.
+
+---
+
+## Anonymous Feedback
+
+Have thoughts, suggestions, or feedback you'd like to share? Use the form below to send me a message anonymously – your identity won't be revealed.
+
+<!-- TODO: Replace YOUR_FORM_ID with your actual Formspree form ID from https://formspree.io -->
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="max-width: 500px;">
+  <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
+  <input type="hidden" name="_subject" value="Anonymous Feedback from inwaves.io">
+  <textarea 
+    name="message" 
+    placeholder="Your anonymous feedback..." 
+    required 
+    rows="5" 
+    style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; font-size: 1rem; resize: vertical; margin-bottom: 12px;"
+  ></textarea>
+  <button 
+    type="submit" 
+    style="background: #333; color: white; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 1rem;"
+  >
+    Send Feedback
+  </button>
+</form>
