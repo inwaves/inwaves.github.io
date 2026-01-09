@@ -58,6 +58,8 @@
     max-width: 500px;
     padding: 0.75rem 1rem;
     font-size: 1rem;
+    background: var(--bg-color);
+    color: var(--text-color);
     border: 1.5px solid var(--primary-color);
     border-radius: 4px;
     margin-bottom: 1rem;
@@ -189,6 +191,17 @@
   <main>
     {{ macros::back_link(path = get_url(path="/")) }}
     {% include "_section_title.html" %}
+    
+    {% if not config.extra.force_theme %}
+    {% set moon_icon = load_data(path="icon/moon.svg") %}
+    {% set sun_icon = load_data(path="icon/sun.svg") %}
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+      <button id="theme-toggle" aria-label="theme switch">
+        <span class="moon-icon">{{ moon_icon | safe }}</span>
+        <span class="sun-icon">{{ sun_icon | safe }}</span>
+      </button>
+    </div>
+    {% endif %}
     
     <article class="prose">
       {{ section.content | safe }}
