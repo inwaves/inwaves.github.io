@@ -14,6 +14,8 @@
   {% include "_custom_font.html" %}
   {% include "_custom_css.html" %}
   <link rel="stylesheet" href="{{ get_url(path='main.css') }}">
+  <!-- Zen Garden styles (site-wide) -->
+  <link rel="stylesheet" href="{{ get_url(path='css/zen-garden.css') }}">
   {% block head %}{% endblock head %}
   {% include "_head_extend.html" %}
 </head>
@@ -30,9 +32,17 @@
     }
   </script>
   {% endif %}
+  
+  <!-- Zen Garden Background (site-wide) -->
+  <div class="zen-garden-container">
+    <canvas id="zen-canvas" data-pattern="ripple" data-gradient="dot"></canvas>
+  </div>
+  
   {% block content %}{% endblock content %}
   {% block script %}{% endblock script %}
   <script src="{{ get_url(path='js/main.js') }}"></script>
+  <!-- Zen Garden script (site-wide) -->
+  <script src="{{ get_url(path='js/zen-garden.js') }}"></script>
 </body>
 
 </html>
