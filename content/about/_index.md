@@ -58,11 +58,11 @@ If you prefer, you can leave me anonymous feedback or questions using this form.
     placeholder="Your anonymous feedback..." 
     required 
     rows="5" 
-    style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; font-size: 1rem; resize: vertical; margin-bottom: 12px;"
+    style="width: 100%; padding: 12px; background: var(--bg-color); color: var(--text-color); border: 1.5px solid var(--text-decoration-color); border-radius: 4px; font-family: inherit; font-size: 1rem; resize: vertical; margin-bottom: 12px;"
   ></textarea>
   <button 
     type="submit" 
-    style="background: #333; color: white; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 1rem;"
+    style="background: var(--primary-color); color: var(--bg-color); border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 1rem;"
   >
     Send Feedback
   </button>
