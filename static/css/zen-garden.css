@@ -1,0 +1,54 @@
+/* Zen Garden Background */
+.zen-garden-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#zen-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Content viewport - solid background for readability on ALL pages */
+#wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+#wrapper > main {
+  background: var(--bg-color, #ffffff);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 1rem auto;
+  max-width: var(--main-max-width, 768px);
+}
+
+/* Dark mode adjustments */
+body.dark #wrapper > main {
+  background: var(--bg-color, #1c1c1c);
+}
+
+/* Homepage specific - wider max-width */
+body.homepage #wrapper > main {
+  max-width: var(--homepage-max-width, 768px);
+}
+
+/* Ensure content stays above the background */
+.prose-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .zen-garden-container {
+    display: none;
+  }
+}
