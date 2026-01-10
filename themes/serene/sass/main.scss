@@ -632,9 +632,10 @@ body.prose-page {
     }
 
     .meta {
-      display: flex;
-      align-items: start;
-      gap: 0.5em;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5em 1em;
+      align-items: baseline;
     }
 
     .icon-wrapper {
@@ -648,10 +649,9 @@ body.prose-page {
       width: 16px;
     }
     .title {
-      flex-shrink: 0;
+      grid-column: 1;
       max-width: 100%;
       color: var(--primary-color);
-      margin-right: 0.5em;
     }
     a.title {
       text-decoration: none;
@@ -663,6 +663,7 @@ body.prose-page {
     }
     .content,
     .content-narrow {
+      grid-column: 1;
       p {
         margin: 0;
         + p {
@@ -683,7 +684,9 @@ body.prose-page {
       }
     }
     .date {
-      margin-left: auto;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
       flex-shrink: 0;
       font-size: 0.9em;
       line-height: calc(var(--line-height) * 1.111);
