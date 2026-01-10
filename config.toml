@@ -45,8 +45,8 @@ sections = [
   { name = "posts", path = "/posts", is_external = false },
   { name = "about", path = "/about", is_external = false },
   { name = "now", path = "/now", is_external = false },
+  { name = "other work", path = "/presentations", is_external = false },
   { name = "cool things", path = "/cool_things", is_external = false },
-  { name = "presentations", path = "/presentations", is_external = false },
   { name = "bookshelf", path = "/bookshelf", is_external = false },
 ]
 blog_section_path = "/posts"
