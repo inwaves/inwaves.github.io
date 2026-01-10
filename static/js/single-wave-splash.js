@@ -47,8 +47,17 @@
     resize();
     window.addEventListener('resize', resize);
     overlay.addEventListener('click', dismiss);
+    // Add Enter key support to dismiss splash
+    document.addEventListener('keydown', handleKeydown);
     
     animate();
+  }
+
+  function handleKeydown(e) {
+    // Dismiss splash when Enter key is pressed
+    if (e.key === 'Enter' && overlay && overlay.style.display !== 'none') {
+      dismiss();
+    }
   }
 
   function resize() {
@@ -162,6 +171,9 @@
     if (animationId) {
       clearTimeout(animationId);
     }
+    
+    // Remove keydown listener when dismissing
+    document.removeEventListener('keydown', handleKeydown);
     
     overlay.style.transition = 'opacity 0.5s ease-out';
     overlay.style.opacity = '0';
