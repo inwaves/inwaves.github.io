@@ -13,6 +13,8 @@ copy = false
 comment = false
 +++
 
+- [How will the miracle happen today?](https://kk.org/thetechnium/how-will-the-miracle-happen-today/)
+- [Impact, agency, and taste](https://www.benkuhn.net/impact/) and [this write-up](https://usefulfictions.substack.com/p/how-to-be-more-agentic) from Cate Hall
 - [this](https://inwaves.io/happiness-sutra) translation of the Happiness Sutra
 - [We've Survived Another Year! Make It Count](https://www.cracked.com/blog/the-true-meaning-christmas-that-everyone-forgets)
 - [Nick Sweeting's blog](https://docs.sweeting.me/s/blog#About)
