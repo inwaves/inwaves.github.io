@@ -45,6 +45,7 @@ sections = [
   { name = "posts", path = "/posts", is_external = false },
   { name = "about", path = "/about", is_external = false },
   { name = "other work", path = "/presentations", is_external = false },
+  { name = "space", path = "https://space.inwaves.io", is_external = true },
   { name = "cool things", path = "/cool_things", is_external = false },
   { name = "bookshelf", path = "/bookshelf", is_external = false },
 ]
