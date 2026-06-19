@@ -1,7 +1,7 @@
 {% import "macros/prose.html" as macros %}
 {% extends "_base.html" %}
 
-{% block page %}prose-page zen-page{% endblock page %}
+{% block page %}prose-page{% endblock page %}
 {% block lang -%}
 {%- if section.extra.lang %}{{section.extra.lang}}{% else %}{{section.lang}}{% endif -%}
 {%- endblock lang %}
@@ -38,24 +38,14 @@
     });
 </script>
 {% endif %}
-<!-- Zen Garden styles -->
-<link rel="stylesheet" href="{{ get_url(path='css/zen-garden.css') }}">
 {% endblock head %}
 
 {% block content %}
-<!-- Zen Garden Background -->
-<div class="zen-garden-container">
-  <canvas id="zen-canvas" 
-          data-pattern="{{ section.extra.zen_pattern | default(value='ripple') }}"
-          data-gradient="{{ section.extra.zen_gradient | default(value='dot') }}">
-  </canvas>
-</div>
-
 <div id="wrapper">
   <main>
     {{ macros::back_link(path = get_url(path="/")) }}
     {% include "_section_title.html" %}
-    <div class="prose-content">
+    <div>
       {% if section.extra.copy %}
       {% set copy_icon = load_data(path="icon/copy.svg") %}
       {% set check_icon = load_data(path="icon/check.svg") %}
@@ -89,6 +79,4 @@
   mermaid.initialize({ startOnLoad: true });
 </script>
 {% endif %}
-<!-- Zen Garden script -->
-<script src="{{ get_url(path='js/zen-garden.js') }}"></script>
 {% endblock script %}

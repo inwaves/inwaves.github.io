@@ -4,7 +4,7 @@ This is a personal website and technical blog focused on AI safety research.
 
 ## Technology Stack
 
-- **Static Site Generator:** [Zola](https://www.getzola.org/) v0.19.2
+- **Static Site Generator:** [Zola](https://www.getzola.org/) v0.22.1
 - **Theme:** [Serene](https://github.com/isunjn/serene) v5.4.3
 - **Hosting:** GitHub Pages
 - **Deployment:** GitHub Actions
@@ -24,7 +24,7 @@ This is a personal website and technical blog focused on AI safety research.
 
 ### Prerequisites
 
-- [Zola](https://www.getzola.org/documentation/getting-started/installation/) v0.19.2 or later
+- [Zola](https://www.getzola.org/documentation/getting-started/installation/) v0.22.1 or later
 
 ### Setup
 
