@@ -7,6 +7,13 @@ content = "Kenneth Li, Oam Patel et al., 2023. [video](https://youtu.be/HGAbaz97
 
 [[collection]]
 type = "card_simple"
+title = "Inductive bias of neural networks on 1D regression: an empirical examination"
+date = "2022"
+link = "/posts/inductive-bias/"
+content = "Master's thesis viva. [video](https://youtu.be/56J2YJ2YOzw)"
+
+[[collection]]
+type = "card_simple"
 title = "Deep equals shallow for ReLU networks in kernel regimes"
 date = "2021"
 link = "https://arxiv.org/abs/2009.14397"
