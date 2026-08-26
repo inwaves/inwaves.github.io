@@ -19,6 +19,9 @@ This is a personal website and technical blog focused on AI safety research.
 - RSS feed generation
 - Light/dark theme switching
 - Responsive design
+- **Conceptions of the Heavens** at `/space`: an interactive 3D tour of historical models of the
+  cosmos (source in `heavens/`, see its README). It is built in CI and linked from a blog post
+  rather than from the navigation.
 
 ## Local Development
 
@@ -46,9 +49,11 @@ zola serve
 ### Development Notes
 
 - The `base_url` in `config.toml` should be set to your development URL for local testing
-- For production deployment, the GitHub Actions workflow automatically sets it to `https://inwaves.github.io`
+- For production deployment, the GitHub Actions workflow automatically sets it to `https://inwaves.io`
 - Static assets are in the `static/` directory
 - Content is in the `content/` directory (posts in `content/posts/`)
+- The `/space` app is built separately in CI (`cd heavens && npm ci && npm test && npm run build`)
+  and copied into `public/space/`; to work on it locally run `npm run dev` inside `heavens/`
 
 ## Content Structure
 
@@ -63,6 +68,8 @@ content/
 ├── cool_things/        # Cool things page
 └── presentations/      # Presentations page
     └── items.toml      # Presentations collection
+
+heavens/                # Conceptions of the Heavens (Vite + three.js), deployed to /space
 ```
 
 ## Deployment
