@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conceptions of the Heavens — from Anaximander to the present</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e0b860' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23e0b860' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%236fb1ff'/%3E%3Ccircle cx='24' cy='16' r='1.8' fill='%23e0b860'/%3E%3C/svg%3E" />
+    <meta name="description" content="An interactive 3D tour through historical models of the cosmos: Anaximander, the Pythagoreans, Eudoxus, Aristotle, Hipparchus, Ptolemy, the medieval and Maragha astronomers, Copernicus, Tycho, Kepler, Galileo, Newton, the discovery of Uranus and Neptune, and the solar system today." />
+  </head>
+  <body>
+    <div id="app">
+      <div id="viewport"></div>
+
+      <header id="topbar">
+        <div class="brand">
+          <h1>Conceptions of the Heavens</h1>
+          <span class="sub">Humanity's models of the cosmos, Anaximander to the present</span>
+        </div>
+        <div class="clock">
+          <button id="btn-play" class="icon-btn" title="Play / pause (Space)">Pause</button>
+          <span id="date" class="date">—</span>
+          <label class="speed">
+            <span id="speed-readout">1 day/s</span>
+            <input id="speed" type="range" min="-2" max="3" step="0.01" value="0" title="Simulation speed ([ and ])" />
+          </label>
+          <button id="btn-epoch" class="icon-btn" title="Return to this worldview's own date">Epoch</button>
+        </div>
+        <div class="panel-toggles">
+          <button class="icon-btn" data-panel="info" title="Show / hide the commentary">Text</button>
+          <button class="icon-btn" data-panel="controls" title="Show / hide the controls">Controls</button>
+          <button class="icon-btn" id="btn-help" title="Keyboard shortcuts and help (H)">?</button>
+        </div>
+      </header>
+
+      <aside id="info" class="panel"></aside>
+      <aside id="controls" class="panel"></aside>
+      <footer id="timeline"></footer>
+      <div id="help" class="modal" hidden></div>
+      <div id="loading" class="loading">Loading the heavens…</div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

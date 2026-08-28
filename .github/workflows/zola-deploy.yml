@@ -34,6 +34,20 @@ jobs:
         with:
           tool: zola@0.22.1
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: heavens/package-lock.json
+
+      - name: Build Conceptions of the Heavens (served at /space)
+        working-directory: heavens
+        run: |
+          npm ci
+          npm test
+          npm run build
+
       - name: Build site
         run: |
           # Set production base_url for custom domain
@@ -41,6 +55,9 @@ jobs:
           zola build
           # Ensure CNAME is in output directory for GitHub Pages custom domain
           cp CNAME public/CNAME
+          # The 3D cosmology app is a static Vite build with relative asset paths
+          mkdir -p public/space
+          cp -r heavens/dist/. public/space/
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
