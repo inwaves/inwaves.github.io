@@ -16,6 +16,10 @@ _site
 # NPM dependencies
 node_modules
 package-lock.json
+!heavens/package-lock.json
+
+# Built app (produced in CI and copied into public/space)
+heavens/dist
 
 # IDE configurations
 .idea
