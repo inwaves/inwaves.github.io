@@ -5,7 +5,6 @@ date = 2026-06-25
 
 [taxonomies]
 categories = ["research"]
-tags = ["alignment", "autoresearch"]
 
 [extra]
 lang = "en"
