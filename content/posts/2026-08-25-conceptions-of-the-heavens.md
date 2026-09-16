@@ -2,6 +2,7 @@
 title = "Conceptions of the Heavens"
 description = "An interactive tour of the models of the cosmos, from Anaximander to Newton and beyond"
 date = 2026-08-25
+updated = 2026-09-16
 
 [taxonomies]
 categories = ["history of science"]
@@ -85,10 +86,27 @@ inevitable, but even in a world where AIs do all the frontier work, people will 
 what is this? Why does it work the way it does? In that world you want a tutor that can show and
 tell, not just tell.
 
-*Postscript.* I gave the same prompt to Maestro, which built a second version,
-[Cosmographia](/cosmographia/). It has thirteen worldviews, from Anaximander to Newton, each set on
-a historical night. Every model can be seen from outside as machinery or from the astronomer's own
-horizon, and a modern ephemeris shows how far each model's predictions stray from the real sky.
+## Addendum — 9 September 2026
+
+There is now a second implementation of the same prompt, made with Maestro:
+[Orbis — The Changing Heavens](/orbis/?era=ptolemy). It follows ten chapters from Anaximander to
+Kepler's 1619 synthesis, with an interactive 3D view, motion trails, and guided explorations of
+things like epicycles and Jupiter's four moons. As before, the moons enter the picture with Galileo
+in 1610, not in the earlier worldviews.
+
+This is a separate interpretation, not a replacement for the
+[original sixteen-model visualisation](/space/#stage=ptolemy&follow=mars&view=orbit&frame=center&speed=3).
+Orbis is deliberately schematic: its chapter notes distinguish documented features from illustrative
+geometry, and its sizes, distances and starting positions are not an astronomical ephemeris.
+
+## Addendum — 16 September 2026
+
+A third implementation of the same prompt, also made with Maestro, is
+[Cosmographia](/cosmographia/?era=ptolemy). It has thirteen worldviews, from Anaximander to Newton,
+each set on a historical night, and every model can be seen from outside as machinery or from the
+astronomer's own horizon. Where Orbis is deliberately schematic, Cosmographia is quantitative: its
+models use historical parameters such as the *Almagest*'s eccentricities and epicycles, and a modern
+ephemeris shows how far each model's predictions stray from the real sky.
 
 [![Ptolemy's cosmos in Cosmographia, on the night of the Mars opposition of 28 May 139 CE](/images/conceptions-of-the-heavens/cosmographia.jpg)](/cosmographia/?era=ptolemy)
 

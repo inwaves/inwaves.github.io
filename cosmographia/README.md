@@ -17,7 +17,9 @@ succeeds and where it fails.
 
 Served at [inwaves.io/cosmographia](https://inwaves.io/cosmographia/). The site's GitHub Actions
 workflow runs `npm ci`, `npm test` and `npm run build` in this directory and copies `dist/` into the
-site's `public/cosmographia/`. The build uses a relative base (`base: './'`), so it works under any
+site's `public/cosmographia/`. Then `npm run test:site` checks the assembled site: it serves
+`public/`, follows the article's link to Cosmographia, checks that the notices ship with the app, and
+renders every era in both views. The build uses a relative base (`base: './'`), so it works under any
 path. Textures resolve through `import.meta.env.BASE_URL`, and deep links are query parameters, for
 example `https://inwaves.io/cosmographia/?era=kepler&view=sky`.
 
@@ -88,6 +90,7 @@ npm test             # unit tests (vitest)
 npm run typecheck
 npm run build        # production bundle in dist/
 npm run smoke        # headless Chromium: every era in both views, fails on console errors
+npm run test:site    # assembled inwaves.io output in ../public: article link, notices, every era
 ```
 
 Environment variables for the dev server:
