@@ -39,10 +39,19 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: heavens/package-lock.json
+          cache-dependency-path: |
+            heavens/package-lock.json
+            cosmographia/package-lock.json
 
       - name: Build Conceptions of the Heavens (served at /space)
         working-directory: heavens
+        run: |
+          npm ci
+          npm test
+          npm run build
+
+      - name: Build Cosmographia (served at /cosmographia)
+        working-directory: cosmographia
         run: |
           npm ci
           npm test
@@ -58,6 +67,9 @@ jobs:
           # The 3D cosmology app is a static Vite build with relative asset paths
           mkdir -p public/space
           cp -r heavens/dist/. public/space/
+          # Cosmographia, a second tour of the historical cosmologies, is also a relative-base Vite build
+          mkdir -p public/cosmographia
+          cp -r cosmographia/dist/. public/cosmographia/
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
