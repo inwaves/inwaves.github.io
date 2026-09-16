@@ -2,6 +2,7 @@
 title = "Conceptions of the Heavens"
 description = "An interactive tour of the models of the cosmos, from Anaximander to Newton and beyond"
 date = 2026-08-25
+updated = 2026-09-09
 
 [taxonomies]
 categories = ["history of science"]
@@ -84,6 +85,19 @@ the work and increasingly replace human engineers, rather than complementing the
 inevitable, but even in a world where AIs do all the frontier work, people will still be curious:
 what is this? Why does it work the way it does? In that world you want a tutor that can show and
 tell, not just tell.
+
+## Addendum — 9 September 2026
+
+There is now a second implementation of the same prompt, made with Maestro:
+[Orbis — The Changing Heavens](/orbis/?era=ptolemy). It follows ten chapters from Anaximander to
+Kepler's 1619 synthesis, with an interactive 3D view, motion trails, and guided explorations of
+things like epicycles and Jupiter's four moons. As before, the moons enter the picture with Galileo
+in 1610, not in the earlier worldviews.
+
+This is a separate interpretation, not a replacement for the
+[original sixteen-model visualisation](/space/#stage=ptolemy&follow=mars&view=orbit&frame=center&speed=3).
+Orbis is deliberately schematic: its chapter notes distinguish documented features from illustrative
+geometry, and its sizes, distances and starting positions are not an astronomical ephemeris.
 
 [^orbits]: As an aside, do you know why all the planets orbit the Sun in the same direction? Why
     don't some go the other way?
