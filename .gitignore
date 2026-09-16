@@ -17,9 +17,11 @@ _site
 node_modules
 package-lock.json
 !heavens/package-lock.json
+!orbis/package-lock.json
 
-# Built app (produced in CI and copied into public/space)
+# Built apps (produced in CI and copied into public/space and public/orbis)
 heavens/dist
+orbis/dist
 
 # IDE configurations
 .idea
