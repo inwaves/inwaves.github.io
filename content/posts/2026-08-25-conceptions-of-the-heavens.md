@@ -85,6 +85,17 @@ inevitable, but even in a world where AIs do all the frontier work, people will 
 what is this? Why does it work the way it does? In that world you want a tutor that can show and
 tell, not just tell.
 
+*Postscript.* I gave the same prompt to Maestro, which built a second version,
+[Cosmographia](/cosmographia/). It has thirteen worldviews, from Anaximander to Newton, each set on
+a historical night. Every model can be seen from outside as machinery or from the astronomer's own
+horizon, and a modern ephemeris shows how far each model's predictions stray from the real sky.
+
+[![Ptolemy's cosmos in Cosmographia, on the night of the Mars opposition of 28 May 139 CE](/images/conceptions-of-the-heavens/cosmographia.jpg)](/cosmographia/?era=ptolemy)
+
+*Ptolemy's cosmos in Cosmographia, on the night of the Mars opposition of 139 CE, with Mars 0.73°
+from where it really was. Click the image to explore all thirteen worldviews; best viewed on a large
+screen.*
+
 [^orbits]: As an aside, do you know why all the planets orbit the Sun in the same direction? Why
     don't some go the other way?
 

@@ -22,6 +22,10 @@ This is a personal website and technical blog focused on AI safety research.
 - **Conceptions of the Heavens** at `/space`: an interactive 3D tour of historical models of the
   cosmos (source in `heavens/`, see its README). It is built in CI and linked from a blog post
   rather than from the navigation.
+- **Cosmographia** at `/cosmographia`: a second interactive 3D atlas of the historical
+  cosmologies, built by Maestro from the same prompt, with each worldview's machinery and the
+  astronomer's own sky (source in `cosmographia/`, see its README). It is built in CI and linked
+  from the same post.
 
 ## Local Development
 
@@ -54,6 +58,8 @@ zola serve
 - Content is in the `content/` directory (posts in `content/posts/`)
 - The `/space` app is built separately in CI (`cd heavens && npm ci && npm test && npm run build`)
   and copied into `public/space/`; to work on it locally run `npm run dev` inside `heavens/`
+- The `/cosmographia` app is built the same way (`cd cosmographia && npm ci && npm test && npm run build`)
+  and copied into `public/cosmographia/`; to work on it locally run `npm run dev` inside `cosmographia/`
 
 ## Content Structure
 
@@ -70,6 +76,7 @@ content/
     └── items.toml      # Presentations collection
 
 heavens/                # Conceptions of the Heavens (Vite + three.js), deployed to /space
+cosmographia/           # Cosmographia (Vite + React + TypeScript + three.js), deployed to /cosmographia
 ```
 
 ## Deployment
