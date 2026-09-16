@@ -5,15 +5,18 @@ on:
     branches:
       - main
       - master
+  pull_request:
+    branches:
+      - main
+      - master
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  # PR checks must never cancel a production deployment.
+  group: pages-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -41,10 +44,18 @@ jobs:
           cache: npm
           cache-dependency-path: |
             heavens/package-lock.json
+            orbis/package-lock.json
             cosmographia/package-lock.json
 
       - name: Build Conceptions of the Heavens (served at /space)
         working-directory: heavens
+        run: |
+          npm ci
+          npm test
+          npm run build
+
+      - name: Build Orbis (served at /orbis)
+        working-directory: orbis
         run: |
           npm ci
           npm test
@@ -67,16 +78,35 @@ jobs:
           # The 3D cosmology app is a static Vite build with relative asset paths
           mkdir -p public/space
           cp -r heavens/dist/. public/space/
-          # Cosmographia, a second tour of the historical cosmologies, is also a relative-base Vite build
+          # Orbis is independent of the original /space implementation.
+          mkdir -p public/orbis
+          cp -r orbis/dist/. public/orbis/
+          # Cosmographia is a third, independent implementation, also a relative-base Vite build.
           mkdir -p public/cosmographia
           cp -r cosmographia/dist/. public/cosmographia/
-        
+
+      - name: Test article links and Orbis in the assembled site
+        working-directory: orbis
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:site
+
+      - name: Test the article link and Cosmographia in the assembled site
+        working-directory: cosmographia
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:site
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   deploy:
+    if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

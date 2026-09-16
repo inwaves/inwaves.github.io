@@ -22,16 +22,21 @@ This is a personal website and technical blog focused on AI safety research.
 - **Conceptions of the Heavens** at `/space`: an interactive 3D tour of historical models of the
   cosmos (source in `heavens/`, see its README). It is built in CI and linked from a blog post
   rather than from the navigation.
-- **Cosmographia** at `/cosmographia`: a second interactive 3D atlas of the historical
-  cosmologies, built by Maestro from the same prompt, with each worldview's machinery and the
-  astronomer's own sky (source in `cosmographia/`, see its README). It is built in CI and linked
-  from the same post.
+- **Orbis — The Changing Heavens** at `/orbis/`: a second, independent 3D interpretation with ten
+  historical chapters, guided explorations and source notes (source in `orbis/`). The article's
+  dated addendum links to it; the original `/space/` implementation remains unchanged.
+- **Cosmographia** at `/cosmographia/`: a third, independent implementation with thirteen
+  worldviews built on historical parameters, each viewable as machinery or from the astronomer's
+  own sky and measured against a modern ephemeris (source in `cosmographia/`, see its README). The
+  article's second dated addendum links to it.
 
 ## Local Development
 
 ### Prerequisites
 
 - [Zola](https://www.getzola.org/documentation/getting-started/installation/) v0.22.1 or later
+- Node.js 22.12+ and npm to build the astronomy apps
+- Python 3 to serve the assembled site during browser tests
 
 ### Setup
 
@@ -58,8 +63,46 @@ zola serve
 - Content is in the `content/` directory (posts in `content/posts/`)
 - The `/space` app is built separately in CI (`cd heavens && npm ci && npm test && npm run build`)
   and copied into `public/space/`; to work on it locally run `npm run dev` inside `heavens/`
-- The `/cosmographia` app is built the same way (`cd cosmographia && npm ci && npm test && npm run build`)
-  and copied into `public/cosmographia/`; to work on it locally run `npm run dev` inside `cosmographia/`
+- Orbis is built independently from `orbis/` and copied into `public/orbis/`. Its assets and home
+  link are relative, so its standalone preview and nested site URL both work.
+- Cosmographia is built independently from `cosmographia/` and copied into `public/cosmographia/`.
+  Its build also uses a relative base; to work on it locally run `npm run dev` inside `cosmographia/`.
+- All three app dev servers use port 8080; run only one at a time.
+
+### Build and validate the complete site
+
+Run these commands from the repository root. Zola recreates `public/`, so copy the app builds
+**after** running it, just as the Pages workflow does. Generated output is not committed.
+
+```sh
+npm --prefix heavens ci
+npm --prefix heavens test
+npm --prefix heavens run build
+npm --prefix orbis ci
+npm --prefix orbis test
+npm --prefix orbis run build
+npm --prefix cosmographia ci
+npm --prefix cosmographia test
+npm --prefix cosmographia run build
+zola build
+cp CNAME public/CNAME
+mkdir -p public/space public/orbis public/cosmographia
+cp -R heavens/dist/. public/space/
+cp -R orbis/dist/. public/orbis/
+cp -R cosmographia/dist/. public/cosmographia/
+# Install Chromium and Linux browser libraries (sudo may be required).
+(cd orbis && npx playwright install --with-deps chromium)
+npm --prefix orbis run test:site
+npm --prefix cosmographia run test:site
+# Optional: leave the complete site available in a browser after the tests.
+python3 -m http.server 8080 --directory public
+```
+
+The integrated browser suite starts its own server on port 8080, runs all Orbis interactions at
+`/orbis/` on desktop and mobile, follows both article links, and checks that the original `/space/`
+app and blog homepage still load. Cosmographia's site check also serves `public/` on port 8080: it
+follows the article's Cosmographia link, checks that the third-party notices are served, and renders
+every era in both views at `/cosmographia/`. Stop other servers on that port before running either.
 
 ## Content Structure
 
@@ -76,12 +119,16 @@ content/
     └── items.toml      # Presentations collection
 
 heavens/                # Conceptions of the Heavens (Vite + three.js), deployed to /space
+orbis/                  # Orbis (React + TypeScript + Three.js), deployed to /orbis
 cosmographia/           # Cosmographia (Vite + React + TypeScript + three.js), deployed to /cosmographia
 ```
 
 ## Deployment
 
-The site automatically deploys to GitHub Pages when changes are pushed to the `master` branch via GitHub Actions.
+Pull requests targeting `master` or `main` build and test the combined site without deploying it.
+The site automatically deploys to GitHub Pages on pushes to those branches (this repository uses
+`master`), or a manual workflow run on one of them. PR checks use separate concurrency groups so
+they cannot cancel a production deployment; only the deployment job receives Pages write permissions.
 
 ## License
 

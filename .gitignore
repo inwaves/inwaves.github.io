@@ -17,10 +17,12 @@ _site
 node_modules
 package-lock.json
 !heavens/package-lock.json
+!orbis/package-lock.json
 !cosmographia/package-lock.json
 
-# Built apps (produced in CI and copied into public/space and public/cosmographia)
+# Built apps (produced in CI and copied into public/space, public/orbis and public/cosmographia)
 heavens/dist
+orbis/dist
 cosmographia/dist
 
 # IDE configurations
