@@ -25,6 +25,10 @@ This is a personal website and technical blog focused on AI safety research.
 - **Orbis — The Changing Heavens** at `/orbis/`: a second, independent 3D interpretation with ten
   historical chapters, guided explorations and source notes (source in `orbis/`). The article's
   dated addendum links to it; the original `/space/` implementation remains unchanged.
+- **Cosmographia** at `/cosmographia/`: a third, independent implementation with thirteen
+  worldviews built on historical parameters, each viewable as machinery or from the astronomer's
+  own sky and measured against a modern ephemeris (source in `cosmographia/`, see its README). The
+  article's second dated addendum links to it.
 
 ## Local Development
 
@@ -60,8 +64,10 @@ zola serve
 - The `/space` app is built separately in CI (`cd heavens && npm ci && npm test && npm run build`)
   and copied into `public/space/`; to work on it locally run `npm run dev` inside `heavens/`
 - Orbis is built independently from `orbis/` and copied into `public/orbis/`. Its assets and home
-  link are relative, so its standalone preview and nested site URL both work. Both app dev servers
-  use port 8080; run only one at a time.
+  link are relative, so its standalone preview and nested site URL both work.
+- Cosmographia is built independently from `cosmographia/` and copied into `public/cosmographia/`.
+  Its build also uses a relative base; to work on it locally run `npm run dev` inside `cosmographia/`.
+- All three app dev servers use port 8080; run only one at a time.
 
 ### Build and validate the complete site
 
@@ -75,21 +81,28 @@ npm --prefix heavens run build
 npm --prefix orbis ci
 npm --prefix orbis test
 npm --prefix orbis run build
+npm --prefix cosmographia ci
+npm --prefix cosmographia test
+npm --prefix cosmographia run build
 zola build
 cp CNAME public/CNAME
-mkdir -p public/space public/orbis
+mkdir -p public/space public/orbis public/cosmographia
 cp -R heavens/dist/. public/space/
 cp -R orbis/dist/. public/orbis/
+cp -R cosmographia/dist/. public/cosmographia/
 # Install Chromium and Linux browser libraries (sudo may be required).
 (cd orbis && npx playwright install --with-deps chromium)
 npm --prefix orbis run test:site
+npm --prefix cosmographia run test:site
 # Optional: leave the complete site available in a browser after the tests.
 python3 -m http.server 8080 --directory public
 ```
 
 The integrated browser suite starts its own server on port 8080, runs all Orbis interactions at
-`/orbis/` on desktop and mobile, follows both article links, and checks that the original `/space/`
-app and blog homepage still load. Stop other servers on that port before running it.
+`/orbis/` in desktop Chromium, follows both article links, and checks that the original `/space/`
+app and blog homepage still load. Cosmographia's site check also serves `public/` on port 8080: it
+follows the article's Cosmographia link, checks that the third-party notices are served, and renders
+every era in both views at `/cosmographia/`. Stop other servers on that port before running either.
 
 ## Content Structure
 
@@ -107,6 +120,7 @@ content/
 
 heavens/                # Conceptions of the Heavens (Vite + three.js), deployed to /space
 orbis/                  # Orbis (React + TypeScript + Three.js), deployed to /orbis
+cosmographia/           # Cosmographia (Vite + React + TypeScript + three.js), deployed to /cosmographia
 ```
 
 ## Deployment

@@ -2,7 +2,7 @@
 title = "Conceptions of the Heavens"
 description = "An interactive tour of the models of the cosmos, from Anaximander to Newton and beyond"
 date = 2026-08-25
-updated = 2026-09-09
+updated = 2026-09-16
 
 [taxonomies]
 categories = ["history of science"]
@@ -98,6 +98,21 @@ This is a separate interpretation, not a replacement for the
 [original sixteen-model visualisation](/space/#stage=ptolemy&follow=mars&view=orbit&frame=center&speed=3).
 Orbis is deliberately schematic: its chapter notes distinguish documented features from illustrative
 geometry, and its sizes, distances and starting positions are not an astronomical ephemeris.
+
+## Addendum — 16 September 2026
+
+A third implementation of the same prompt, also made with Maestro, is
+[Cosmographia](/cosmographia/?era=ptolemy). It has thirteen worldviews, from Anaximander to Newton,
+each set on a historical night, and every model can be seen from outside as machinery or from the
+astronomer's own horizon. Where Orbis is deliberately schematic, Cosmographia is quantitative: its
+models use historical parameters such as the *Almagest*'s eccentricities and epicycles, and a modern
+ephemeris shows how far each model's predictions stray from the real sky.
+
+[![Ptolemy's cosmos in Cosmographia, on the night of the Mars opposition of 28 May 139 CE](/images/conceptions-of-the-heavens/cosmographia.jpg)](/cosmographia/?era=ptolemy)
+
+*Ptolemy's cosmos in Cosmographia, on the night of the Mars opposition of 139 CE, with Mars 0.73°
+from where it really was. Click the image to explore all thirteen worldviews; best viewed on a large
+screen.*
 
 [^orbits]: As an aside, do you know why all the planets orbit the Sun in the same direction? Why
     don't some go the other way?

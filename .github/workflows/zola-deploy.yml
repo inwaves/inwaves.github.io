@@ -45,6 +45,7 @@ jobs:
           cache-dependency-path: |
             heavens/package-lock.json
             orbis/package-lock.json
+            cosmographia/package-lock.json
 
       - name: Build Conceptions of the Heavens (served at /space)
         working-directory: heavens
@@ -55,6 +56,13 @@ jobs:
 
       - name: Build Orbis (served at /orbis)
         working-directory: orbis
+        run: |
+          npm ci
+          npm test
+          npm run build
+
+      - name: Build Cosmographia (served at /cosmographia)
+        working-directory: cosmographia
         run: |
           npm ci
           npm test
@@ -73,9 +81,18 @@ jobs:
           # Orbis is independent of the original /space implementation.
           mkdir -p public/orbis
           cp -r orbis/dist/. public/orbis/
+          # Cosmographia is a third, independent implementation, also a relative-base Vite build.
+          mkdir -p public/cosmographia
+          cp -r cosmographia/dist/. public/cosmographia/
 
       - name: Test article links and Orbis in the assembled site
         working-directory: orbis
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:site
+
+      - name: Test the article link and Cosmographia in the assembled site
+        working-directory: cosmographia
         run: |
           npx playwright install --with-deps chromium
           npm run test:site
