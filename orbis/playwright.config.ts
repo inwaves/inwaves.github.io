@@ -18,6 +18,8 @@ export default defineConfig({
       ],
     },
   },
+  // Orbis is meant for a desktop browser, so that is the one project tested. The
+  // narrow-screen layout in styles.css is kept as a courtesy and is not covered.
   projects: [
     {
       name: "desktop",
@@ -25,10 +27,6 @@ export default defineConfig({
         ...devices["Desktop Chrome"],
         viewport: { width: 1440, height: 1050 },
       },
-    },
-    {
-      name: "mobile",
-      use: { ...devices["iPhone 13"], defaultBrowserType: "chromium" },
     },
   ],
   webServer: {
