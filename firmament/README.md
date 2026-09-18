@@ -14,9 +14,9 @@ It was made to answer a reader's question while working through Thomas Kuhn's
 
 This is one of the astronomy apps in `inwaves/inwaves.github.io`, served at **`/firmament/`**.
 It is independent of the others, which are all answers to the same prompt, quoted in the
-*Conceptions of the Heavens* article: the original in `../heavens/`, served at `/space/`, and
-Orbis in `../orbis/`, served at `/orbis/`. A dated addendum in the article links here. No app
-replaces another.
+*Conceptions of the Heavens* article: the original in `../heavens/`, served at `/space/`; Orbis in
+`../orbis/`, served at `/orbis/`; and Cosmographia in `../cosmographia/`, served at
+`/cosmographia/`. A dated addendum in the article links here. No app replaces another.
 
 The Pages workflow builds this directory from the committed lockfile
 (`npm ci && npm test && npm run build`), copies `dist/` into the Zola output at
@@ -73,8 +73,9 @@ Earth lies across the foot of the picture, and keeping a body in view follows it
 along the horizon, holding the ground in the picture for as long as both fit and
 the body's whole disc in the frame for as long as it fits, centring it once it
 no longer can. His wheels of fire arch overhead, because in his cosmos they are
-physical things: rims of mist, with the Sun and Moon as holes in them. No other worldview's machinery is drawn
-in the sky from the Earth, since nobody ever saw a deferent.
+physical things: rims of mist, with the Sun and Moon as holes in them. No other
+worldview's machinery is drawn in the sky from the Earth, since nobody ever saw a
+deferent.
 
 **The timeline** across the top steps through the ten worldviews. Changing
 worldview jumps to a date that suits it, unless *Lock date when changing
