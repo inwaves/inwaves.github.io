@@ -25,6 +25,10 @@ This is a personal website and technical blog focused on AI safety research.
 - **Orbis — The Changing Heavens** at `/orbis/`: a second, independent 3D interpretation with ten
   historical chapters, guided explorations and source notes (source in `orbis/`). The article's
   dated addendum links to it; the original `/space/` implementation remains unchanged.
+- **Firmament** at `/firmament/`: a further independent implementation with ten worldviews from
+  Anaximander to Newton, each seen from outside as machinery or from the Earth against a real star
+  catalogue, built on sourced historical parameters whose provenance ships with the app (source in
+  `firmament/`, see its README). The article's addendum of 18 September 2026 links to it.
 
 ## Local Development
 
@@ -60,8 +64,10 @@ zola serve
 - The `/space` app is built separately in CI (`cd heavens && npm ci && npm test && npm run build`)
   and copied into `public/space/`; to work on it locally run `npm run dev` inside `heavens/`
 - Orbis is built independently from `orbis/` and copied into `public/orbis/`. Its assets and home
-  link are relative, so its standalone preview and nested site URL both work. Both app dev servers
-  use port 8080; run only one at a time.
+  link are relative, so its standalone preview and nested site URL both work.
+- Firmament is built independently from `firmament/` and copied into `public/firmament/`. Its build
+  also uses a relative base; to work on it locally run `npm run dev` inside `firmament/`.
+- All the app dev servers use port 8080; run only one at a time.
 
 ### Build and validate the complete site
 
@@ -75,14 +81,19 @@ npm --prefix heavens run build
 npm --prefix orbis ci
 npm --prefix orbis test
 npm --prefix orbis run build
+npm --prefix firmament ci
+npm --prefix firmament test
+npm --prefix firmament run build
 zola build
 cp CNAME public/CNAME
-mkdir -p public/space public/orbis
+mkdir -p public/space public/orbis public/firmament
 cp -R heavens/dist/. public/space/
 cp -R orbis/dist/. public/orbis/
+cp -R firmament/dist/. public/firmament/
 # Install Chromium and Linux browser libraries (sudo may be required).
 (cd orbis && npx playwright install --with-deps chromium)
 npm --prefix orbis run test:site
+npm --prefix firmament run test:site
 # Optional: leave the complete site available in a browser after the tests.
 python3 -m http.server 8080 --directory public
 ```
@@ -90,6 +101,11 @@ python3 -m http.server 8080 --directory public
 The integrated browser suite starts its own server on port 8080, runs all Orbis interactions at
 `/orbis/` on desktop and mobile, follows both article links, and checks that the original `/space/`
 app and blog homepage still load. Stop other servers on that port before running it.
+
+Firmament's site check serves `public/` itself, on a port the system picks, so it needs nothing
+stopped. It checks that the licence notices and provenance notes are in the build, follows the
+article's Firmament link, loads every worldview from its own link in both views at `/firmament/`,
+and checks that each era offers exactly the discoveries of its time.
 
 ## Content Structure
 
@@ -107,6 +123,7 @@ content/
 
 heavens/                # Conceptions of the Heavens (Vite + three.js), deployed to /space
 orbis/                  # Orbis (React + TypeScript + Three.js), deployed to /orbis
+firmament/              # Firmament (Vite + three.js, no framework), deployed to /firmament
 ```
 
 ## Deployment
