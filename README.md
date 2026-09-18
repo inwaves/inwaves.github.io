@@ -29,6 +29,10 @@ This is a personal website and technical blog focused on AI safety research.
   worldviews built on historical parameters, each viewable as machinery or from the astronomer's
   own sky and measured against a modern ephemeris (source in `cosmographia/`, see its README). The
   article's second dated addendum links to it.
+- **Firmament** at `/firmament/`: a further independent implementation with ten worldviews from
+  Anaximander to Newton, each seen from outside as machinery or from the Earth against a real star
+  catalogue, built on sourced historical parameters whose provenance ships with the app (source in
+  `firmament/`, see its README). The article's addendum of 18 September 2026 links to it.
 
 ## Local Development
 
@@ -67,7 +71,9 @@ zola serve
   link are relative, so its standalone preview and nested site URL both work.
 - Cosmographia is built independently from `cosmographia/` and copied into `public/cosmographia/`.
   Its build also uses a relative base; to work on it locally run `npm run dev` inside `cosmographia/`.
-- All three app dev servers use port 8080; run only one at a time.
+- Firmament is built independently from `firmament/` and copied into `public/firmament/`. Its build
+  also uses a relative base; to work on it locally run `npm run dev` inside `firmament/`.
+- All four app dev servers use port 8080; run only one at a time.
 
 ### Build and validate the complete site
 
@@ -84,16 +90,21 @@ npm --prefix orbis run build
 npm --prefix cosmographia ci
 npm --prefix cosmographia test
 npm --prefix cosmographia run build
+npm --prefix firmament ci
+npm --prefix firmament test
+npm --prefix firmament run build
 zola build
 cp CNAME public/CNAME
-mkdir -p public/space public/orbis public/cosmographia
+mkdir -p public/space public/orbis public/cosmographia public/firmament
 cp -R heavens/dist/. public/space/
 cp -R orbis/dist/. public/orbis/
 cp -R cosmographia/dist/. public/cosmographia/
+cp -R firmament/dist/. public/firmament/
 # Install Chromium and Linux browser libraries (sudo may be required).
 (cd orbis && npx playwright install --with-deps chromium)
 npm --prefix orbis run test:site
 npm --prefix cosmographia run test:site
+npm --prefix firmament run test:site
 # Optional: leave the complete site available in a browser after the tests.
 python3 -m http.server 8080 --directory public
 ```
@@ -103,6 +114,11 @@ The integrated browser suite starts its own server on port 8080, runs all Orbis 
 app and blog homepage still load. Cosmographia's site check also serves `public/` on port 8080: it
 follows the article's Cosmographia link, checks that the third-party notices are served, and renders
 every era in both views at `/cosmographia/`. Stop other servers on that port before running either.
+
+Firmament's site check serves `public/` itself, on a port the system picks, so it needs nothing
+stopped. It checks that the licence notices and provenance notes are in the build, follows the
+article's Firmament link, loads every worldview from its own link in both views at `/firmament/`,
+and checks that each era offers exactly the discoveries of its time.
 
 ## Content Structure
 
@@ -121,6 +137,7 @@ content/
 heavens/                # Conceptions of the Heavens (Vite + three.js), deployed to /space
 orbis/                  # Orbis (React + TypeScript + Three.js), deployed to /orbis
 cosmographia/           # Cosmographia (Vite + React + TypeScript + three.js), deployed to /cosmographia
+firmament/              # Firmament (Vite + three.js, no framework), deployed to /firmament
 ```
 
 ## Deployment

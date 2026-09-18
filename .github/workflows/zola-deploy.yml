@@ -46,6 +46,7 @@ jobs:
             heavens/package-lock.json
             orbis/package-lock.json
             cosmographia/package-lock.json
+            firmament/package-lock.json
 
       - name: Build Conceptions of the Heavens (served at /space)
         working-directory: heavens
@@ -68,6 +69,13 @@ jobs:
           npm test
           npm run build
 
+      - name: Build Firmament (served at /firmament)
+        working-directory: firmament
+        run: |
+          npm ci
+          npm test
+          npm run build
+
       - name: Build site
         run: |
           # Set production base_url for custom domain
@@ -84,6 +92,9 @@ jobs:
           # Cosmographia is a third, independent implementation, also a relative-base Vite build.
           mkdir -p public/cosmographia
           cp -r cosmographia/dist/. public/cosmographia/
+          # Firmament is a further independent implementation, also a relative-base Vite build.
+          mkdir -p public/firmament
+          cp -r firmament/dist/. public/firmament/
 
       - name: Test article links and Orbis in the assembled site
         working-directory: orbis
@@ -94,6 +105,13 @@ jobs:
       - name: Test the article link and Cosmographia in the assembled site
         working-directory: cosmographia
         run: |
+          npx playwright install --with-deps chromium
+          npm run test:site
+
+      - name: Test the article link and Firmament in the assembled site
+        working-directory: firmament
+        run: |
+          # Serves public/ on a port of its own choosing, so it cannot collide with port 8080.
           npx playwright install --with-deps chromium
           npm run test:site
 
