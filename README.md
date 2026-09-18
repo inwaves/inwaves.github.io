@@ -99,7 +99,7 @@ python3 -m http.server 8080 --directory public
 ```
 
 The integrated browser suite starts its own server on port 8080, runs all Orbis interactions at
-`/orbis/` on desktop and mobile, follows both article links, and checks that the original `/space/`
+`/orbis/` in desktop Chromium, follows both article links, and checks that the original `/space/`
 app and blog homepage still load. Cosmographia's site check also serves `public/` on port 8080: it
 follows the article's Cosmographia link, checks that the third-party notices are served, and renders
 every era in both views at `/cosmographia/`. Stop other servers on that port before running either.
