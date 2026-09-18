@@ -99,7 +99,7 @@ python3 -m http.server 8080 --directory public
 ```
 
 The integrated browser suite starts its own server on port 8080, runs all Orbis interactions at
-`/orbis/` on desktop and mobile, follows both article links, and checks that the original `/space/`
+`/orbis/` in desktop Chromium, follows both article links, and checks that the original `/space/`
 app and blog homepage still load. Stop other servers on that port before running it.
 
 Firmament's site check serves `public/` itself, on a port the system picks, so it needs nothing
