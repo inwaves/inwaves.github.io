@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="An interactive 3D progression through humanity's models of the cosmos, from Anaximander to Newton." />
+    <title>Firmament: a history of the cosmos in motion</title>
+    <!-- Inline, so that the tab has an icon without a request that could fail under a sub-path. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2303050b'/%3E%3Ccircle cx='16' cy='16' r='11.5' fill='none' stroke='%23d8b45a' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='none' stroke='%23d8b45a' stroke-opacity='.55' stroke-width='1.2'/%3E%3Ccircle cx='16' cy='16' r='2.2' fill='%235fa8ff'/%3E%3Ccircle cx='27.5' cy='16' r='2' fill='%23ffd27a'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="viewport" aria-label="Three-dimensional view of the cosmos"></div>
+
+    <header id="timeline" aria-label="Progression of worldviews">
+      <button id="era-prev" class="icon-button" type="button" aria-label="Earlier worldview">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </button>
+      <nav id="era-list"></nav>
+      <button id="era-next" class="icon-button" type="button" aria-label="Later worldview">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+      </button>
+    </header>
+
+    <button id="toggle-info" class="panel-toggle left" type="button" aria-controls="info" aria-expanded="true">About this worldview</button>
+    <button id="toggle-tools" class="panel-toggle right" type="button" aria-controls="tools" aria-expanded="true">Controls</button>
+
+    <aside id="info" class="panel" aria-label="About this worldview"></aside>
+    <aside id="tools" class="panel" aria-label="Controls"></aside>
+
+    <footer id="transport" aria-label="Time controls"></footer>
+
+    <div id="fatal" role="alert" hidden></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
