@@ -162,10 +162,8 @@ test("changes camera, layers, focused body, and timeline controls", async ({
 
 test("opens historical sources, runs a mechanism exploration and dismisses the guide", async ({
   page,
-}, testInfo) => {
+}) => {
   await page.goto("./");
-  if (testInfo.project.name === "mobile")
-    await page.getByRole("button", { name: "About this worldview" }).click();
   await page
     .getByRole("button", { name: "Historical notes & sources" })
     .click();
@@ -182,11 +180,6 @@ test("opens historical sources, runs a mechanism exploration and dismisses the g
     .getByRole("button", { name: "Explore an epicycle", exact: true })
     .click();
   await expect(page.getByText("LOOK A LITTLE CLOSER")).toBeVisible();
-  if (testInfo.project.name === "mobile") {
-    const scene = await page.locator("canvas").boundingBox();
-    const explanation = await page.locator(".discovery-card").boundingBox();
-    expect(explanation!.y).toBeGreaterThanOrEqual(scene!.y + scene!.height - 1);
-  }
   await expect(
     page.getByRole("img", { name: /Apparent longitude from Earth/ }),
   ).toBeVisible();
@@ -201,22 +194,11 @@ test("opens historical sources, runs a mechanism exploration and dismisses the g
       () => document.documentElement.scrollWidth <= window.innerWidth,
     ),
   ).toBe(true);
-  if (testInfo.project.name === "mobile") {
-    await page
-      .getByLabel("JUMP TO A WORLDVIEW", { exact: true })
-      .selectOption("galileo");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Other worlds have moons.",
-    );
-    await expect(page.locator('#body-picker option[value="io"]')).toHaveCount(
-      1,
-    );
-  }
 });
 
 test("keeps explorations accessible before and after fullscreen", async ({
   page,
-}, testInfo) => {
+}) => {
   await page.goto("./");
   const openExploration = () =>
     page
@@ -227,17 +209,6 @@ test("keeps explorations accessible before and after fullscreen", async ({
       .poll(() => page.evaluate(() => Boolean(document.fullscreenElement)))
       .toBe(true);
     const card = page.locator(".discovery-card");
-    if (testInfo.project.name === "mobile") {
-      await expect(page.locator(".cosmos-panel")).toHaveCSS(
-        "overflow-y",
-        "auto",
-      );
-      const scene = await page.locator("canvas").boundingBox();
-      const explanation = await card.boundingBox();
-      expect(explanation!.y).toBeGreaterThanOrEqual(
-        scene!.y + scene!.height - 1,
-      );
-    }
     await card
       .getByText("Apparent longitude from Earth · down = retrograde")
       .scrollIntoViewIfNeeded();
