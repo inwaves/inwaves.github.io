@@ -68,10 +68,12 @@ Each chapter links its references inside the application. Data and citations liv
 npm test                   # Complete deterministic geometry and history suite
 npm run build              # Strict TypeScript check and production bundle
 npx playwright install --with-deps chromium
-npm run test:e2e           # Full browser suite, desktop and mobile
+npm run test:e2e           # Full browser suite, in desktop Chromium
 npm run check              # All of the above (browser must be installed first)
 npm run test:site          # Full browser suite at /orbis/ plus both article links; requires assembled ../public/
 ```
+
+The browser suites run one project, desktop Chromium at 1440 by 1050: Orbis is meant for a desktop browser. The narrow-screen layout is kept but is not tested.
 
 The browser installation command installs Linux system libraries as well as Chromium (sudo may be needed). Stop any server on port 8080 before testing: the suites launch their own servers rather than accidentally testing another app. The standalone suite uses Vite; `test:site` uses Python 3 to serve the assembled website and reruns every interaction at `/orbis/`, including a regression for the favicon and home link. It also follows the article links to both implementations and checks the blog homepage. Software WebGL is enabled for headless Chromium. Test output is ignored by version control. No backend, telemetry, accounts or secrets.
 
