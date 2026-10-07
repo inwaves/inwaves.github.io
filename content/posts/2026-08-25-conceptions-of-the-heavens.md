@@ -2,7 +2,7 @@
 title = "Conceptions of the Heavens"
 description = "An interactive tour of the models of the cosmos, from Anaximander to Newton and beyond"
 date = 2026-08-25
-updated = 2026-09-16
+updated = 2026-09-18
 
 [taxonomies]
 categories = ["history of science"]
@@ -113,6 +113,36 @@ ephemeris shows how far each model's predictions stray from the real sky.
 *Ptolemy's cosmos in Cosmographia, on the night of the Mars opposition of 139 CE, with Mars 0.73°
 from where it really was. Click the image to explore all thirteen worldviews; best viewed on a large
 screen.*
+
+## Addendum — 18 September 2026
+
+There is now another implementation of the same prompt:
+[Firmament](/firmament/#era=ptolemy&body=mars). It steps through ten worldviews, from Anaximander's
+wheels of fire to Newton, and each can be watched from outside, as machinery, or from the Earth,
+where what the machinery was for becomes visible: the looping, backtracking paths of the planets
+against a real star catalogue. Selecting a planet names the parts that carry it and says whether
+it is, at that moment, moving direct or retrograde.
+
+[![Aristotle's cosmos in Firmament, with its solid shells cut away](/images/conceptions-of-the-heavens/firmament-aristotle.jpg)](/firmament/#era=aristotle)
+
+*Aristotle's cosmos in Firmament: the crystalline shells cut away to show that they are solid and
+packed without a gap, with water, air and fire wrapped around the Earth at the centre. The pale
+loops are the paths the planets have just traced, retrograde loops included. Click the image to
+explore all ten worldviews; best viewed on a large screen.*
+
+Its numbers come from the sources wherever the sources survive: the *Almagest*'s constants in their
+original sexagesimal digits, the nested distances of the *Planetary Hypotheses*, Copernicus's own
+orbit radii. A [provenance document](/firmament/SOURCES.txt) marks every value as sourced, a modern
+reconstruction, or merely illustrative. The historical failures are kept and not smoothed over:
+Eudoxus's Venus never retrogrades, and his Mars does so three times too often. A single light sits
+at the Sun in every era, so phases are never painted on; point a telescope at Ptolemy's cosmos,
+which the app allows as a deliberate anachronism, and his Venus can only ever be a crescent. As
+before, Jupiter's moons arrive with Galileo in 1610, and Saturn's ring, Titan and the comet of 1682
+with Newton.
+
+Like the others, this is a separate interpretation and replaces nothing. It computes no forces:
+every body follows a closed-form path, so the comet returns in 1758, the year Halley named, and not
+in March 1759, when the real one arrived, held back by Jupiter and Saturn.
 
 [^orbits]: As an aside, do you know why all the planets orbit the Sun in the same direction? Why
     don't some go the other way?
