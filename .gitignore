@@ -19,11 +19,13 @@ package-lock.json
 !heavens/package-lock.json
 !orbis/package-lock.json
 !cosmographia/package-lock.json
+!firmament/package-lock.json
 
-# Built apps (produced in CI and copied into public/space, public/orbis and public/cosmographia)
+# Built apps (produced in CI and copied into public/space, public/orbis, public/cosmographia and public/firmament)
 heavens/dist
 orbis/dist
 cosmographia/dist
+firmament/dist
 
 # IDE configurations
 .idea
