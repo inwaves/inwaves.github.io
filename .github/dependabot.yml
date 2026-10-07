@@ -1,0 +1,28 @@
+# Keeps the deploy workflow's pinned action SHAs, the three apps' npm dependencies and the theme
+# submodule up to date. Minor and patch updates are grouped into one pull request per ecosystem
+# and directory to keep the noise down; major updates arrive individually.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
+
+  - package-ecosystem: npm
+    directories:
+      - /heavens
+      - /orbis
+      - /cosmographia
+    schedule:
+      interval: monthly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule:
+      interval: monthly
