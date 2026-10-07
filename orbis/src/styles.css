@@ -1,7 +1,7 @@
-/* Fonts are loaded once by index.html; local fallbacks remain usable offline. */
+/* Fonts are bundled from @fontsource (imported in main.tsx); local fallbacks remain usable offline. */
 
 :root {
-  font-family: "DM Sans", sans-serif;
+  font-family: "DM Sans Variable", "DM Sans", sans-serif;
   color: #e5e3da;
   background: #101414;
   font-synthesis: none;
@@ -135,7 +135,7 @@ select option {
 .brand span {
   display: block;
   font:
-    8px "DM Sans",
+    8px "DM Sans Variable",
     sans-serif;
   letter-spacing: 2.7px;
   margin-top: 7px;
@@ -565,7 +565,7 @@ h1 {
 }
 .orientation svg text {
   font:
-    6px "DM Sans",
+    6px "DM Sans Variable",
     sans-serif;
   fill: #baa882;
   stroke: none;
