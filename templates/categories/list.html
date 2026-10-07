@@ -1,0 +1,16 @@
+{#
+  Category pages are not used on this site. The theme redirects them home with an inline
+  script; this override does the same with a meta refresh so the site ships no inline JavaScript.
+#}
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url={{ get_url(path='/') }}">
+  <meta name="robots" content="noindex">
+  <title>{{ config.title }}</title>
+</head>
+<body>
+  <p><a href="{{ get_url(path='/') }}">Continue to {{ config.title }}</a></p>
+</body>
+</html>

@@ -19,6 +19,13 @@ This is a personal website and technical blog focused on AI safety research.
 - RSS feed generation
 - Light/dark theme switching
 - Responsive design
+- **Bookshelf** at `/bookshelf/`: a searchable, filterable grid of books rendered at build time from
+  `static/data/books.json`, with covers served from this site (see *Bookshelf data* below).
+- No inline scripts, and no third-party requests by default, on the Zola pages: KaTeX is served from
+  `static/katex/` (vendored from `katex@0.16.11`, MIT), the theme and math bootstraps live in
+  `static/js/`, and the bookshelf serves its own cover images. The opt-in features that do reach
+  out are Mermaid (`mermaid = true` per page; loaded from jsDelivr at a pinned version with
+  Subresource Integrity) and giscus comments (`comment = true`). See *Hardening notes* below.
 - **Conceptions of the Heavens** at `/space`: an interactive 3D tour of historical models of the
   cosmos (source in `heavens/`, see its README). It is built in CI and linked from a blog post
   rather than from the navigation.
@@ -65,7 +72,7 @@ zola serve
 - For production deployment, the GitHub Actions workflow automatically sets it to `https://inwaves.io`
 - Static assets are in the `static/` directory
 - Content is in the `content/` directory (posts in `content/posts/`)
-- The `/space` app is built separately in CI (`cd heavens && npm ci && npm test && npm run build`)
+- The `/space` app is built separately in CI (`cd heavens && npm ci --ignore-scripts && npm test && npm run build`)
   and copied into `public/space/`; to work on it locally run `npm run dev` inside `heavens/`
 - Orbis is built independently from `orbis/` and copied into `public/orbis/`. Its assets and home
   link are relative, so its standalone preview and nested site URL both work.
@@ -81,13 +88,13 @@ Run these commands from the repository root. Zola recreates `public/`, so copy t
 **after** running it, just as the Pages workflow does. Generated output is not committed.
 
 ```sh
-npm --prefix heavens ci
+npm --prefix heavens ci --ignore-scripts
 npm --prefix heavens test
 npm --prefix heavens run build
-npm --prefix orbis ci
+npm --prefix orbis ci --ignore-scripts
 npm --prefix orbis test
 npm --prefix orbis run build
-npm --prefix cosmographia ci
+npm --prefix cosmographia ci --ignore-scripts
 npm --prefix cosmographia test
 npm --prefix cosmographia run build
 npm --prefix firmament ci
@@ -115,11 +122,6 @@ app and blog homepage still load. Cosmographia's site check also serves `public/
 follows the article's Cosmographia link, checks that the third-party notices are served, and renders
 every era in both views at `/cosmographia/`. Stop other servers on that port before running either.
 
-Firmament's site check serves `public/` itself, on a port the system picks, so it needs nothing
-stopped. It checks that the licence notices and provenance notes are in the build, follows the
-article's Firmament link, loads every worldview from its own link in both views at `/firmament/`,
-and checks that each era offers exactly the discoveries of its time.
-
 ## Content Structure
 
 ```
@@ -129,6 +131,7 @@ content/
 │   ├── _index.md       # Posts section config
 │   └── *.md            # Individual posts
 ├── about/              # About page
+├── bookshelf/          # Bookshelf page (data in static/data/books.json)
 ├── now/                # Now page
 ├── cool_things/        # Cool things page
 └── presentations/      # Presentations page
