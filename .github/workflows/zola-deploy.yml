@@ -68,7 +68,7 @@ jobs:
       - name: Build Firmament (served at /firmament)
         working-directory: firmament
         run: |
-          npm ci
+          npm ci --ignore-scripts
           npm test
           npm run build
 
